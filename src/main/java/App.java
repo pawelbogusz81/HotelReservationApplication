@@ -21,20 +21,9 @@ public class App {
 
         } else if (option == 2) {
             System.out.println("Tworzenie nowego pokoju...");
-            try {
-                System.out.print("Podaj numer pokoju: ");
-                int number = input.nextInt();
-                System.out.print("Podaj licznę łóżek: ");
-                int beds = input.nextInt();
 
-                Room newRoom = new Room(number, beds);
+            Room newRoom = createNewRoom(input);
 
-                String newRoomInfo = String.format("Utworzono nowy pokój - numer %d; łóżek: %d", newRoom.number, newRoom.beds);
-                System.out.println(newRoomInfo);
-            } catch (Exception e) {
-                System.out.println("Podane dane muszą być liczbami!");
-                e.printStackTrace();
-            }
 
         } else if (option == 3) {
             System.out.println("Wybrano opcję 3.");
@@ -67,7 +56,6 @@ public class App {
             System.out.println("Niepoprawne dane wejsciowe, wprowadz liczbę.");
             e.printStackTrace();
         }
-
         return actionNumber;
     }
 
@@ -87,6 +75,26 @@ public class App {
             return newGuest;
         } catch (Exception e) {
             System.out.println("Podaj wiek jako liczbę!");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    static Room createNewRoom(Scanner in) {
+
+        try {
+            System.out.print("Podaj numer pokoju: ");
+            int number = in.nextInt();
+            System.out.print("Podaj licznę łóżek: ");
+            int beds = in.nextInt();
+
+            Room newRoom = new Room(number, beds);
+
+            String newRoomInfo = String.format("Utworzono nowy pokój - numer %d; łóżek: %d", newRoom.number, newRoom.beds);
+            System.out.println(newRoomInfo);
+            return newRoom;
+        } catch (Exception e) {
+            System.out.println("Podane dane muszą być liczbami!");
             e.printStackTrace();
             return null;
         }
