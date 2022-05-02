@@ -32,7 +32,7 @@ public class App {
         }
     }
 
-    static void showSystemInfo(String hotelName, int systemVersion, boolean isDeveloperVersion) {
+    private static void showSystemInfo(String hotelName, int systemVersion, boolean isDeveloperVersion) {
 
         System.out.print("Witam w systemie rezerwacji dla hotelu: " + hotelName);
         System.out.print("Aktualna wersja systemu: " + systemVersion);
@@ -41,7 +41,7 @@ public class App {
         System.out.println("\n=========================\n");
     }
 
-    static int getActionFromUser(Scanner in) {
+    private static int getActionFromUser(Scanner in) {
 
         System.out.println("1. Dodaj nowego gościa.");
         System.out.println("2. Dodaj nowy pokój.");
@@ -59,7 +59,7 @@ public class App {
         return actionNumber;
     }
 
-    static Guest createNewGuest(Scanner input) {
+    private static Guest createNewGuest(Scanner input) {
 
         try {
             System.out.print("Podaj swoje imię: ");
@@ -70,8 +70,8 @@ public class App {
             int age = input.nextInt();
 
             Guest newGuest = new Guest(firstName, lastName, age);
-            String newGuestInfo = String.format("Utworzono nowego gościa: %s %s (%d)", newGuest.firstName, newGuest.lastName, newGuest.age);
-            System.out.println(newGuestInfo);
+            String info = newGuest.getInfo();
+            System.out.println(info);
             return newGuest;
         } catch (Exception e) {
             System.out.println("Podaj wiek jako liczbę!");
@@ -80,7 +80,7 @@ public class App {
         }
     }
 
-    static Room createNewRoom(Scanner in) {
+    private static Room createNewRoom(Scanner in) {
 
         try {
             System.out.print("Podaj numer pokoju: ");
@@ -90,8 +90,7 @@ public class App {
 
             Room newRoom = new Room(number, beds);
 
-            String newRoomInfo = String.format("Utworzono nowy pokój - numer %d; łóżek: %d", newRoom.number, newRoom.beds);
-            System.out.println(newRoomInfo);
+            System.out.println(newRoom.getInfo());
             return newRoom;
         } catch (Exception e) {
             System.out.println("Podane dane muszą być liczbami!");
