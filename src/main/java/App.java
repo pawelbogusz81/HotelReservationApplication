@@ -70,8 +70,7 @@ public class App {
             int age = input.nextInt();
 
             Guest newGuest = new Guest(firstName, lastName, age);
-            String info = newGuest.getInfo();
-            System.out.println(info);
+            System.out.println(newGuest.getInfo());
             return newGuest;
         } catch (Exception e) {
             System.out.println("Podaj wiek jako liczbę!");
@@ -85,18 +84,40 @@ public class App {
         try {
             System.out.print("Podaj numer pokoju: ");
             int number = in.nextInt();
-            System.out.print("Podaj licznę łóżek: ");
-            int beds = in.nextInt();
 
-            Room newRoom = new Room(number, beds);
-
+            BedType bedType = getBedTypeInfoFromUser(in);
+            Room newRoom = new Room(number, bedType);
             System.out.println(newRoom.getInfo());
+
             return newRoom;
         } catch (Exception e) {
             System.out.println("Podane dane muszą być liczbami!");
             e.printStackTrace();
             return null;
         }
+
+    }
+
+    private static BedType getBedTypeInfoFromUser(Scanner in) {
+
+        System.out.println("Dostępne łóżka: ");
+        System.out.println("\t1. Łóżko pojedyńcze (SINGLE)");
+        System.out.println("\t2. Łóżko podwójne (DOUBLE)");
+        System.out.println("\t3. Łoże królewskie (KING_SIZE)");
+        System.out.print("Wybierz opcję: ");
+
+        int bedTypeOption = in.nextInt();
+        BedType bedType = null;
+        if (bedTypeOption == 1) {
+            bedType = BedType.SINGLE;
+        } else if (bedTypeOption == 2) {
+            bedType = BedType.DOUBLE;
+        } else if (bedTypeOption == 3) {
+            bedType = BedType.KING_SIZE;
+        } else {
+            System.out.println("Dostepne opcje wyłącznie 1,2 lub 3!");
+        }
+        return bedType;
     }
 
 }

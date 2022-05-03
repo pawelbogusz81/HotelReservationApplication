@@ -1,15 +1,15 @@
 public class Room {
 
     private int number;
-    private int beds;
+    private BedType bedType;
 
-    Room(int number, int beds) {
+    public Room(int number, BedType bedType) {
         this.number = number;
-        this.beds = beds;
+        this.bedType = bedType;
     }
 
     public String getInfo() {
-        return String.format("Utworzono nowy pokój - numer: %d; łóżek: %d", number, beds);
+        return String.format("Utworzono nowy pokój - numer: %d; łóżko: %s", number, bedType);
     }
 
     public int getNumber() {
@@ -20,11 +20,11 @@ public class Room {
         this.number = number;
     }
 
-    public int getBeds() {
-        return beds;
+    public BedType getBeds() {
+        return bedType;
     }
 
-    public void setBeds(int beds) {
-        this.beds = beds;
+    public void setBeds(BedType bedType) {
+        this.bedType = bedType;
     }
 }
