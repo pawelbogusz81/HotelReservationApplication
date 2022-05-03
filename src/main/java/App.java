@@ -69,8 +69,10 @@ public class App {
             System.out.print("Podaj swój wiek: ");
             int age = input.nextInt();
 
-            Guest newGuest = new Guest(firstName, lastName, age);
+            Gender gender = getGenderFromUser(input);
+            Guest newGuest = new Guest(firstName, lastName, age, gender);
             System.out.println(newGuest.getInfo());
+
             return newGuest;
         } catch (Exception e) {
             System.out.println("Podaj wiek jako liczbę!");
@@ -95,7 +97,6 @@ public class App {
             e.printStackTrace();
             return null;
         }
-
     }
 
     private static BedType getBedTypeInfoFromUser(Scanner in) {
@@ -115,9 +116,28 @@ public class App {
         } else if (bedTypeOption == 3) {
             bedType = BedType.KING_SIZE;
         } else {
-            System.out.println("Dostepne opcje wyłącznie 1,2 lub 3!");
+            System.out.println("Dostepne opcje to wyłącznie 1,2 lub 3");
         }
         return bedType;
+    }
+
+    private static Gender getGenderFromUser(Scanner input) {
+
+        System.out.println("Podaj swoją płeć: ");
+        System.out.println("\t1. Kobieta (FEMALE)");
+        System.out.println("\t2. Mężczyzna (MALE)");
+        System.out.print("Twoja płeć to: ");
+
+        int genderOption = input.nextInt();
+        Gender gender = null;
+        if (genderOption == 1) {
+            gender = Gender.FEMALE;
+        } else if (genderOption == 2) {
+            gender = Gender.MALE;
+        } else {
+            System.out.println("Dostepne opcje to wyłącznie 1,2");
+        }
+        return gender;
     }
 
 }
