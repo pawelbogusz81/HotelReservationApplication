@@ -87,7 +87,7 @@ public class App {
             System.out.print("Podaj numer pokoju: ");
             int number = in.nextInt();
 
-            BedType bedType = getBedTypeInfoFromUser(in);
+            BedType bedType[] = chooseBedType(in);
             Room newRoom = new Room(number, bedType);
             System.out.println(newRoom.getInfo());
 
@@ -99,26 +99,35 @@ public class App {
         }
     }
 
-    private static BedType getBedTypeInfoFromUser(Scanner in) {
+    private static BedType[] chooseBedType(Scanner in) {
 
-        System.out.println("Dostępne łóżka: ");
-        System.out.println("\t1. Łóżko pojedyńcze (SINGLE)");
-        System.out.println("\t2. Łóżko podwójne (DOUBLE)");
-        System.out.println("\t3. Łoże królewskie (KING_SIZE)");
-        System.out.print("Wybierz opcję: ");
+        System.out.print("Ile łóżek w pokoju? ");
+        int bedNumber = in.nextInt();
+        BedType[] bedTypes = new BedType[bedNumber];
 
-        int bedTypeOption = in.nextInt();
-        BedType bedType = null;
-        if (bedTypeOption == 1) {
-            bedType = BedType.SINGLE;
-        } else if (bedTypeOption == 2) {
-            bedType = BedType.DOUBLE;
-        } else if (bedTypeOption == 3) {
-            bedType = BedType.KING_SIZE;
-        } else {
-            System.out.println("Dostepne opcje to wyłącznie 1,2 lub 3");
+        for (int i=0; i<bedNumber; i++) {
+            System.out.println("Dostępne łóżka: ");
+            System.out.println("\t1. Łóżko pojedyńcze (SINGLE)");
+            System.out.println("\t2. Łóżko podwójne (DOUBLE)");
+            System.out.println("\t3. Łoże królewskie (KING_SIZE)");
+            System.out.print("Wybierz opcję: ");
+
+            int bedTypeOption = in.nextInt();
+            BedType bedType = null;
+            if (bedTypeOption == 1) {
+                bedType = BedType.SINGLE;
+            } else if (bedTypeOption == 2) {
+                bedType = BedType.DOUBLE;
+            } else if (bedTypeOption == 3) {
+                bedType = BedType.KING_SIZE;
+            } else {
+                System.out.println("Dostepne opcje to wyłącznie 1,2 lub 3");
+            }
+
+            bedTypes[i] = bedType;
         }
-        return bedType;
+
+        return bedTypes;
     }
 
     private static Gender getGenderFromUser(Scanner input) {

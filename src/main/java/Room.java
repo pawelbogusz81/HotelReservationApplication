@@ -1,15 +1,23 @@
 public class Room {
 
     private int number;
-    private BedType bedType;
+    private BedType[] beds;
 
-    public Room(int number, BedType bedType) {
+    public Room(int number, BedType[] bedType) {
         this.number = number;
-        this.bedType = bedType;
+        this.beds = bedType;
     }
 
     public String getInfo() {
-        return String.format("Utworzono nowy pokój - numer: %d; łóżko: %s", number, bedType);
+
+        System.out.println("Wybrane łóżka w pokoju:");
+
+        int numberOfBeds = beds.length;
+        for (int i = 0; i < numberOfBeds; i = i + 1) {
+            System.out.println(beds[i]);
+        }
+        return String.format("Utworzono nowy pokój - numer: %d", this.number);
+
     }
 
 }
