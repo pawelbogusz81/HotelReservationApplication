@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -12,23 +13,33 @@ public class App {
 
         Scanner input = new Scanner(System.in);
 
+        try {
+            performAction(input);
+        }
+        catch (WrongOptionException e) {
+            System.out.println("Wystąpił niespodziewany błąd.");
+            System.out.println("Kod błędu: " + e.getCode());
+            System.out.println("Komunikat błędu: " + e.getMessage());
+        }
+
+
+    }
+
+    private static void performAction(Scanner input) {
         int option = getActionFromUser(input);
 
         if (option == 1) {
             System.out.println("Tworzenie nowego gościa...");
-
             Guest newGuest = createNewGuest(input);
 
         } else if (option == 2) {
             System.out.println("Tworzenie nowego pokoju...");
-
             Room newRoom = createNewRoom(input);
-
 
         } else if (option == 3) {
             System.out.println("Wybrano opcję 3.");
         } else {
-            System.out.println("Wybrano niepoprawną akcję.");
+            throw new WrongOptionException("Wrong option in main menu.");
         }
     }
 
@@ -90,12 +101,10 @@ public class App {
             BedType bedType[] = chooseBedType(in);
             Room newRoom = new Room(number, bedType);
             System.out.println(newRoom.getInfo());
-
             return newRoom;
-        } catch (Exception e) {
-            System.out.println("Podane dane muszą być liczbami!");
-            e.printStackTrace();
-            return null;
+        } catch (InputMismatchException e) {
+            throw new InputMismatchException("Numbers only required, when selecting bed type");
+
         }
     }
 
@@ -121,7 +130,7 @@ public class App {
             } else if (bedTypeOption == 3) {
                 bedType = BedType.KING_SIZE;
             } else {
-                System.out.println("Dostepne opcje to wyłącznie 1,2 lub 3");
+                throw new WrongOptionException("Wrong option in bed's type menu.");
             }
 
             bedTypes[i] = bedType;
@@ -144,7 +153,7 @@ public class App {
         } else if (genderOption == 2) {
             gender = Gender.MALE;
         } else {
-            System.out.println("Dostepne opcje to wyłącznie 1,2");
+            throw new WrongOptionException("Wrong option in gender menu.");
         }
         return gender;
     }
