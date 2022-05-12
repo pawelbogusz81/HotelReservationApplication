@@ -35,11 +35,11 @@ public class App {
     private static void performAction(Scanner input) {
         int option = getActionFromUser(input);
 
-        GuestRepository repo = new GuestRepository();
+        GuestService guestService = new GuestService();
 
         if (option == 1) {
             System.out.println("Tworzenie nowego gościa...");
-            Guest newGuest = repo.createNewGuest(input);
+            Guest newGuest = guestService.createNewGuest(input);
 
         } else if (option == 2) {
             System.out.println("Tworzenie nowego pokoju...");
