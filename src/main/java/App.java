@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class App {
 
+    private static TextUI textUI = new TextUI();
+
     public static void main(String[] args) {
 
         String hotelName = "Overlook";
@@ -35,11 +37,11 @@ public class App {
     private static void performAction(Scanner input) {
         int option = getActionFromUser(input);
 
-        GuestService guestService = new GuestService();
 
         if (option == 1) {
             System.out.println("Tworzenie nowego gościa...");
-            Guest newGuest = guestService.createNewGuest(input);
+//            Guest newGuest = guestService.createNewGuest(input);
+            textUI.readeNewGuestData(input);
 
         } else if (option == 2) {
             System.out.println("Tworzenie nowego pokoju...");

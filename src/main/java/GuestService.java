@@ -1,10 +1,16 @@
-import java.util.Scanner;
-
 public class GuestService {
 
     GuestRepository repository = new GuestRepository();
 
-    public Guest createNewGuest (Scanner input) {
-        return repository.createNewGuest(input);
+    public Guest createNewGuest (String firstName, String lastName, int age, int genderOption) {
+        Gender gender = Gender.MALE;
+
+        if (genderOption == 1) {
+            gender = Gender.FEMALE;
+        } else if (genderOption == 2) {
+            gender = Gender.MALE;
+        }
+
+        return repository.createNewGuest(firstName, lastName, age, gender);
     }
 }
