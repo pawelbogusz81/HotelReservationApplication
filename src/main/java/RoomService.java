@@ -1,12 +1,26 @@
-import java.util.Scanner;
-
-
 public class RoomService {
 
     RoomRepository roomRepository = new RoomRepository();
 
-    public Room createNewRoom(Scanner input) {
+    public Room createNewRoom(int number, int[] bedTypesOptions) {
 
-        return roomRepository.createNewRoom(input);
+        BedType[] bedTypes = new BedType[bedTypesOptions.length];
+
+        for (int i = 0; i < bedTypesOptions.length; i++) {
+
+            BedType bedType;
+            if (bedTypesOptions[i] == 1) {
+                bedType = BedType.SINGLE;
+            } else if (bedTypesOptions[i] == 2) {
+                bedType = BedType.DOUBLE;
+            } else if (bedTypesOptions[i] == 3) {
+                bedType = BedType.KING_SIZE;
+            } else {
+                throw new WrongOptionException("Wrong option in bed's type menu.");
+            }
+            bedTypes[i] = bedType;
+        }
+
+        return roomRepository.createNewRoom(number, bedTypes);
     }
 }

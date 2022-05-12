@@ -41,13 +41,11 @@ public class App {
 
         if (option == 1) {
             System.out.println("Tworzenie nowego gościa...");
-//            Guest newGuest = guestService.createNewGuest(input);
-            textUI.readeNewGuestData(input);
+            textUI.readNewGuestData(input);
 
         } else if (option == 2) {
             System.out.println("Tworzenie nowego pokoju...");
-            Room newRoom = roomService.createNewRoom(input);
-
+            textUI.readNewRoomData(input);
         } else if (option == 3) {
             System.out.println("Wybrano opcję 3.");
         } else {
@@ -71,7 +69,7 @@ public class App {
         System.out.println("3. Wyszukaj gościa.");
         System.out.print("Wybierz opcję: ");
 
-        int actionNumber = 0;
+        int actionNumber;
 
         try {
             actionNumber = in.nextInt();
