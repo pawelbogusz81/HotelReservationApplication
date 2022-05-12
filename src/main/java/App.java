@@ -15,19 +15,18 @@ public class App {
 
         try {
             performAction(input);
-        }
-        catch (WrongOptionException e) {
+        } catch (WrongOptionException | OnlyNumberException e) {
             System.out.println("Wystąpił niespodziewany błąd.");
             System.out.println("Kod błędu: " + e.getCode());
             System.out.println("Komunikat błędu: " + e.getMessage());
-        } catch (OnlyNumberException e) {
-            System.out.println("Wystąpił niespodziewany błąd.");
-            System.out.println("Kod błędu: " + e.getCode());
-            System.out.println("Komunikat błędu: " + e.getMessage());
+            e.printStackTrace();
         } catch (Exception e) {
             System.out.println("Unknown Exception.");
             System.out.println("Unknown exception code.");
             System.out.println("Exception message: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            System.out.println("Wychodzę z aplikacji.");
         }
 
 
@@ -36,9 +35,11 @@ public class App {
     private static void performAction(Scanner input) {
         int option = getActionFromUser(input);
 
+        GuestRepository repo = new GuestRepository();
+
         if (option == 1) {
             System.out.println("Tworzenie nowego gościa...");
-            Guest newGuest = createNewGuest(input);
+            Guest newGuest = repo.createNewGuest(input);
 
         } else if (option == 2) {
             System.out.println("Tworzenie nowego pokoju...");
@@ -67,7 +68,7 @@ public class App {
         System.out.println("3. Wyszukaj gościa.");
         System.out.print("Wybierz opcję: ");
 
-        int actionNumber= 0;
+        int actionNumber = 0;
 
         try {
             actionNumber = in.nextInt();
@@ -77,28 +78,7 @@ public class App {
         return actionNumber;
     }
 
-    private static Guest createNewGuest(Scanner input) {
 
-        try {
-            System.out.print("Podaj swoje imię: ");
-            String firstName = input.next();
-            System.out.print("Podaj swoje nazwisko: ");
-            String lastName = input.next();
-            System.out.print("Podaj swój wiek: ");
-            int age = input.nextInt();
-
-            Gender gender = getGenderFromUser(input);
-            Guest newGuest = new Guest(firstName, lastName, age, gender);
-            System.out.println(newGuest.getInfo());
-
-            return newGuest;
-        } catch (InputMismatchException e) {
-            throw new OnlyNumberException("Use only numbers typing your age");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     private static Room createNewRoom(Scanner in) {
 
@@ -123,7 +103,7 @@ public class App {
             int bedNumber = in.nextInt();
             BedType[] bedTypes = new BedType[bedNumber];
 
-            for (int i=0; i<bedNumber; i++) {
+            for (int i = 0; i < bedNumber; i++) {
                 System.out.println("Dostępne łóżka: ");
                 System.out.println("\t1. Łóżko pojedyńcze (SINGLE)");
                 System.out.println("\t2. Łóżko podwójne (DOUBLE)");
@@ -151,7 +131,6 @@ public class App {
         }
 
 
-
     }
 
     private static Gender getGenderFromUser(Scanner input) {
@@ -162,7 +141,7 @@ public class App {
         System.out.print("Twoja płeć to: ");
 
         int genderOption = input.nextInt();
-        Gender gender = null;
+        Gender gender = Gender.MALE;
         if (genderOption == 1) {
             gender = Gender.FEMALE;
         } else if (genderOption == 2) {

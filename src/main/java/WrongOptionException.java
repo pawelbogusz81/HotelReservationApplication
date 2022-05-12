@@ -1,4 +1,4 @@
-public class WrongOptionException extends RuntimeException {
+public class WrongOptionException extends ReservationCustomException {
 
     private final int code = 101;
 
