@@ -48,11 +48,11 @@ public class TextUI {
         }
     }
 
-    private static int[] chooseBedType(Scanner input) {
+    private int[] chooseBedType(Scanner input) {
         System.out.print("Ile łóżek w pokoju?: ");
         int bedNumber = input.nextInt();
 
-        int[] bedTypes = new int [bedNumber];
+        int[] bedTypes = new int[bedNumber];
 
 
         for (int i = 0; i < bedNumber; i++) {
@@ -67,5 +67,71 @@ public class TextUI {
         }
         return bedTypes;
 
+    }
+
+    public void showSystemInfo(String hotelName, int systemVersion, boolean isDeveloperVersion) {
+
+        System.out.print("Witam w systemie rezerwacji dla hotelu: " + hotelName);
+        System.out.print("Aktualna wersja systemu: " + systemVersion);
+        System.out.print("Wersja developerska: " + isDeveloperVersion);
+
+        System.out.println("\n=========================\n");
+    }
+
+    public void showMainMenu() {
+
+        Scanner input = new Scanner(System.in);
+
+        try {
+            performAction(input);
+        } catch (WrongOptionException | OnlyNumberException e) {
+            System.out.println("Wystąpił niespodziewany błąd.");
+            System.out.println("Kod błędu: " + e.getCode());
+            System.out.println("Komunikat błędu: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Unknown Exception.");
+            System.out.println("Unknown exception code.");
+            System.out.println("Exception message: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            System.out.println("Wychodzę z aplikacji.");
+        }
+    }
+
+    private void performAction(Scanner input) {
+        int option = getActionFromUser(input);
+        RoomService roomService = new RoomService();
+
+
+        if (option == 1) {
+            System.out.println("Tworzenie nowego gościa...");
+            readNewGuestData(input);
+
+        } else if (option == 2) {
+            System.out.println("Tworzenie nowego pokoju...");
+            readNewRoomData(input);
+        } else if (option == 3) {
+            System.out.println("Wybrano opcję 3.");
+        } else {
+            throw new WrongOptionException("Wrong option in main menu.");
+        }
+    }
+
+    private int getActionFromUser(Scanner in) {
+
+        System.out.println("1. Dodaj nowego gościa.");
+        System.out.println("2. Dodaj nowy pokój.");
+        System.out.println("3. Wyszukaj gościa.");
+        System.out.print("Wybierz opcję: ");
+
+        int actionNumber;
+
+        try {
+            actionNumber = in.nextInt();
+        } catch (InputMismatchException e) {
+            throw new OnlyNumberException("Use only numbers in main menu.");
+        }
+        return actionNumber;
     }
 }
