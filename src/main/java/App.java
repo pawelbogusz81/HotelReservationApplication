@@ -36,6 +36,7 @@ public class App {
 
     private static void performAction(Scanner input) {
         int option = getActionFromUser(input);
+        RoomService roomService = new RoomService();
 
 
         if (option == 1) {
@@ -45,7 +46,7 @@ public class App {
 
         } else if (option == 2) {
             System.out.println("Tworzenie nowego pokoju...");
-            Room newRoom = createNewRoom(input);
+            Room newRoom = roomService.createNewRoom(input);
 
         } else if (option == 3) {
             System.out.println("Wybrano opcję 3.");
@@ -79,79 +80,4 @@ public class App {
         }
         return actionNumber;
     }
-
-
-
-    private static Room createNewRoom(Scanner in) {
-
-        try {
-            System.out.print("Podaj numer pokoju: ");
-            int number = in.nextInt();
-
-            BedType bedType[] = chooseBedType(in);
-            Room newRoom = new Room(number, bedType);
-            System.out.println(newRoom.getInfo());
-            return newRoom;
-        } catch (InputMismatchException e) {
-            throw new OnlyNumberException("Numbers only required, when selecting bed type");
-        }
-    }
-
-    private static BedType[] chooseBedType(Scanner in) {
-
-        System.out.print("Ile łóżek w pokoju?: ");
-
-        try {
-            int bedNumber = in.nextInt();
-            BedType[] bedTypes = new BedType[bedNumber];
-
-            for (int i = 0; i < bedNumber; i++) {
-                System.out.println("Dostępne łóżka: ");
-                System.out.println("\t1. Łóżko pojedyńcze (SINGLE)");
-                System.out.println("\t2. Łóżko podwójne (DOUBLE)");
-                System.out.println("\t3. Łoże królewskie (KING_SIZE)");
-                System.out.print("Wybierz opcję: ");
-
-                int bedTypeOption = in.nextInt();
-                BedType bedType = null;
-                if (bedTypeOption == 1) {
-                    bedType = BedType.SINGLE;
-                } else if (bedTypeOption == 2) {
-                    bedType = BedType.DOUBLE;
-                } else if (bedTypeOption == 3) {
-                    bedType = BedType.KING_SIZE;
-                } else {
-                    throw new WrongOptionException("Wrong option in bed's type menu.");
-                }
-                bedTypes[i] = bedType;
-            }
-
-            return bedTypes;
-
-        } catch (InputMismatchException e) {
-            throw new OnlyNumberException("Use only numbers typing number of beds");
-        }
-
-
-    }
-
-    private static Gender getGenderFromUser(Scanner input) {
-
-        System.out.println("Podaj swoją płeć: ");
-        System.out.println("\t1. Kobieta (FEMALE)");
-        System.out.println("\t2. Mężczyzna (MALE)");
-        System.out.print("Twoja płeć to: ");
-
-        int genderOption = input.nextInt();
-        Gender gender = Gender.MALE;
-        if (genderOption == 1) {
-            gender = Gender.FEMALE;
-        } else if (genderOption == 2) {
-            gender = Gender.MALE;
-        } else {
-            throw new WrongOptionException("Wrong option in gender menu.");
-        }
-        return gender;
-    }
-
 }
