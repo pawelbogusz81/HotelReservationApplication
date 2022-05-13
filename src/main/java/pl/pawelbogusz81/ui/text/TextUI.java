@@ -31,12 +31,17 @@ public class TextUI {
             System.out.print("Twoja płeć to: ");
 
             int genderOption = input.nextInt();
+            boolean isFemale;
 
-            if (genderOption != 1 && genderOption != 2) {
+            if (genderOption == 1) {
+                isFemale = true;
+            } else if (genderOption == 2) {
+                isFemale = false;
+            } else {
                 throw new WrongOptionException("Wrong option in gender menu.");
             }
 
-            Guest newGuest = guestService.createNewGuest(firstName, lastName, age, genderOption);
+            Guest newGuest = guestService.createNewGuest(firstName, lastName, age, isFemale);
             System.out.println(newGuest.getInfo());
 
         } catch (InputMismatchException e) {

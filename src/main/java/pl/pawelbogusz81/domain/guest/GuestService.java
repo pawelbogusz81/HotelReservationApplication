@@ -4,10 +4,11 @@ public class GuestService {
 
     private final GuestRepository repository = new GuestRepository();
 
-    public Guest createNewGuest (String firstName, String lastName, int age, int genderOption) {
+    public Guest createNewGuest (String firstName, String lastName, int age, boolean isFemale) {
+
         Gender gender = Gender.MALE;
 
-        if (genderOption == 1) {
+        if (isFemale) {
             gender = Gender.FEMALE;
         }
 
