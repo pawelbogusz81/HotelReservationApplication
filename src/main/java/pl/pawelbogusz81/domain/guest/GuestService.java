@@ -1,3 +1,5 @@
+package pl.pawelbogusz81.domain.guest;
+
 public class GuestService {
 
     GuestRepository repository = new GuestRepository();

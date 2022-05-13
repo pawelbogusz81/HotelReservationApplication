@@ -1,3 +1,5 @@
+package pl.pawelbogusz81.domain.room;
+
 public class Room {
 
     private int number;

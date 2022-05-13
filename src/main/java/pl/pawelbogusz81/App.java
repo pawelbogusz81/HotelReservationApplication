@@ -1,3 +1,7 @@
+package pl.pawelbogusz81;
+
+import pl.pawelbogusz81.ui.text.TextUI;
+
 public class App {
 
     private static TextUI textUI = new TextUI();

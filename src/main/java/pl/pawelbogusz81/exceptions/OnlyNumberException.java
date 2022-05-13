@@ -1,3 +1,5 @@
+package pl.pawelbogusz81.exceptions;
+
 public class OnlyNumberException extends ReservationCustomException{
     private int code = 102;
 

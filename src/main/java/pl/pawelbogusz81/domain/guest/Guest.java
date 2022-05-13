@@ -1,3 +1,5 @@
+package pl.pawelbogusz81.domain.guest;
+
 public class Guest {
 
     private String firstName;

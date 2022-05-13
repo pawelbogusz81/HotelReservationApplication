@@ -1,3 +1,5 @@
+package pl.pawelbogusz81.domain.guest;
+
 public class GuestRepository {
 
     public Guest createNewGuest(String firstName, String lastName, int age, Gender gender) {

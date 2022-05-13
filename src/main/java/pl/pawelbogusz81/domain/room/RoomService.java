@@ -1,3 +1,7 @@
+package pl.pawelbogusz81.domain.room;
+
+import pl.pawelbogusz81.exceptions.WrongOptionException;
+
 public class RoomService {
 
     RoomRepository roomRepository = new RoomRepository();

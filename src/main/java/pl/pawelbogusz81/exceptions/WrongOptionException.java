@@ -1,3 +1,5 @@
+package pl.pawelbogusz81.exceptions;
+
 public class WrongOptionException extends ReservationCustomException {
 
     private final int code = 101;

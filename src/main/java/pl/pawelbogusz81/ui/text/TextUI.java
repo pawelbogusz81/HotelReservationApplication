@@ -1,3 +1,12 @@
+package pl.pawelbogusz81.ui.text;
+
+import pl.pawelbogusz81.exceptions.OnlyNumberException;
+import pl.pawelbogusz81.exceptions.WrongOptionException;
+import pl.pawelbogusz81.domain.guest.Guest;
+import pl.pawelbogusz81.domain.guest.GuestService;
+import pl.pawelbogusz81.domain.room.Room;
+import pl.pawelbogusz81.domain.room.RoomService;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
