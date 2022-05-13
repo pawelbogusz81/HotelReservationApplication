@@ -8,6 +8,7 @@ import pl.pawelbogusz81.domain.room.Room;
 import pl.pawelbogusz81.domain.room.RoomService;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class TextUI {
@@ -126,7 +127,8 @@ public class TextUI {
                 System.out.println("Tworzenie nowego pokoju...");
                 readNewRoomData(input);
             } else if (option == 3) {
-                System.out.println("Wybrano opcję 3.");
+                System.out.println("Wypisywanie wszystkich gości...");
+                showAllGuest();
             } else if (option == 0) {
                 System.out.println("Wychodzę z aplikacji");
             } else {
@@ -135,11 +137,21 @@ public class TextUI {
         }
     }
 
+    private void showAllGuest() {
+
+        System.out.println("Lista gości w hotelu:");
+        List<Guest> guests =  this.guestService.getAllGuests();
+
+        for (Guest guest : guests){
+            System.out.println(guest.getInfo());
+        }
+    }
+
     private int getActionFromUser(Scanner in) {
         System.out.println("Dostępne opcje systemu:");
         System.out.println("\t1. Dodaj nowego gościa.");
         System.out.println("\t2. Dodaj nowy pokój.");
-        System.out.println("\t3. Wyszukaj gościa.");
+        System.out.println("\t3. Wypisz wszystkich gości.");
         System.out.println("\t0. Wyjście z aplikacji.");
         System.out.print("Wybierz opcję: ");
 

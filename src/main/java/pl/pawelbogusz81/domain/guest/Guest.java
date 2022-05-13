@@ -15,8 +15,8 @@ public class Guest {
         this.gender = gender;
     }
 
-    public String getInfo() {
-        return String.format("Utworzono nowego gościa: %s %s (%d, %s)", firstName, lastName, age, gender);
+    public final String getInfo() {
+        return String.format("\t%s %s (%d, %s)", firstName, lastName, age, gender);
     }
 
 }
