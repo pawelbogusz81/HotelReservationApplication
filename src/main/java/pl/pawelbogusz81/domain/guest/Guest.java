@@ -8,7 +8,7 @@ public class Guest {
     private Gender gender;
 
 
-    Guest(String firstName, String lastName, int age, Gender gender) {
+     Guest(String firstName, String lastName, int age, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

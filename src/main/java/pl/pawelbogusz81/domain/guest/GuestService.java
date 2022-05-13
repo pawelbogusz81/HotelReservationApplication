@@ -2,7 +2,7 @@ package pl.pawelbogusz81.domain.guest;
 
 public class GuestService {
 
-    GuestRepository repository = new GuestRepository();
+    private GuestRepository repository = new GuestRepository();
 
     public Guest createNewGuest (String firstName, String lastName, int age, int genderOption) {
         Gender gender = Gender.MALE;
