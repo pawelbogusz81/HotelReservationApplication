@@ -2,8 +2,8 @@ package pl.pawelbogusz81.domain.room;
 
 public class Room {
 
-    private int number;
-    private BedType[] beds;
+    private final int number;
+    private final BedType[] beds;
 
     Room(int number, BedType[] bedType) {
         this.number = number;
@@ -12,10 +12,10 @@ public class Room {
 
     public String getInfo() {
 
-        String bedInfo = "Wybrane łóżka w pokoju: \n";
+        StringBuilder bedInfo = new StringBuilder("Wybrane łóżka w pokoju: \n");
 
         for (BedType bed : beds) {
-            bedInfo = bedInfo + "\t" + bed + "\n";
+            bedInfo.append("\t").append(bed).append("\n");
 
         }
         return String.format("Utworzono nowy pokój - numer: %d, %s", this.number, bedInfo);

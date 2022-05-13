@@ -4,7 +4,7 @@ import pl.pawelbogusz81.ui.text.TextUI;
 
 public class App {
 
-    private static TextUI textUI = new TextUI();
+    private static final TextUI textUI = new TextUI();
 
     public static void main(String[] args) {
 

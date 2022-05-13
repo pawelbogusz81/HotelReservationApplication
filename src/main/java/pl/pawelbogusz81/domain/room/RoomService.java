@@ -4,7 +4,7 @@ import pl.pawelbogusz81.exceptions.WrongOptionException;
 
 public class RoomService {
 
-    private RoomRepository roomRepository = new RoomRepository();
+    private final RoomRepository roomRepository = new RoomRepository();
 
     public Room createNewRoom(int number, int[] bedTypesOptions) {
 

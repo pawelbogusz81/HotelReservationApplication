@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class TextUI {
 
-    private GuestService guestService = new GuestService();
-    private RoomService roomService = new RoomService();
+    private final GuestService guestService = new GuestService();
+    private final RoomService roomService = new RoomService();
 
     private void readNewGuestData(Scanner input) {
 
@@ -110,8 +110,6 @@ public class TextUI {
 
     private void performAction(Scanner input) {
         int option = getActionFromUser(input);
-        RoomService roomService = new RoomService();
-
 
         if (option == 1) {
             System.out.println("Tworzenie nowego gościa...");
