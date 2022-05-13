@@ -85,9 +85,9 @@ public class TextUI {
 
     public void showSystemInfo(String hotelName, int systemVersion, boolean isDeveloperVersion) {
 
-        System.out.print("Witam w systemie rezerwacji dla hotelu: " + hotelName);
-        System.out.print("Aktualna wersja systemu: " + systemVersion);
-        System.out.print("Wersja developerska: " + isDeveloperVersion);
+        System.out.println("Witam w systemie rezerwacji dla hotelu: " + hotelName);
+        System.out.println("Aktualna wersja systemu: " + systemVersion);
+        System.out.println("Wersja developerska: " + isDeveloperVersion);
 
         System.out.println("\n=========================\n");
     }
@@ -108,33 +108,39 @@ public class TextUI {
             System.out.println("Unknown exception code.");
             System.out.println("Exception message: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            System.out.println("Wychodzę z aplikacji.");
         }
     }
 
     private void performAction(Scanner input) {
-        int option = getActionFromUser(input);
 
-        if (option == 1) {
-            System.out.println("Tworzenie nowego gościa...");
-            readNewGuestData(input);
+        int option = -1;
+        while (option != 0) {
 
-        } else if (option == 2) {
-            System.out.println("Tworzenie nowego pokoju...");
-            readNewRoomData(input);
-        } else if (option == 3) {
-            System.out.println("Wybrano opcję 3.");
-        } else {
-            throw new WrongOptionException("Wrong option in main menu.");
+            option = getActionFromUser(input);
+
+            if (option == 1) {
+                System.out.println("Tworzenie nowego gościa...");
+                readNewGuestData(input);
+
+            } else if (option == 2) {
+                System.out.println("Tworzenie nowego pokoju...");
+                readNewRoomData(input);
+            } else if (option == 3) {
+                System.out.println("Wybrano opcję 3.");
+            } else if (option == 0) {
+                System.out.println("Wychodzę z aplikacji");
+            } else {
+                throw new WrongOptionException("Wrong option in main menu.");
+            }
         }
     }
 
     private int getActionFromUser(Scanner in) {
-
-        System.out.println("1. Dodaj nowego gościa.");
-        System.out.println("2. Dodaj nowy pokój.");
-        System.out.println("3. Wyszukaj gościa.");
+        System.out.println("Dostępne opcje systemu:");
+        System.out.println("\t1. Dodaj nowego gościa.");
+        System.out.println("\t2. Dodaj nowy pokój.");
+        System.out.println("\t3. Wyszukaj gościa.");
+        System.out.println("\t0. Wyjście z aplikacji.");
         System.out.print("Wybierz opcję: ");
 
         int actionNumber;
