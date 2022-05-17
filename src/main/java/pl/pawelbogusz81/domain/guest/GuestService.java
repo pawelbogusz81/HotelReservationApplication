@@ -14,11 +14,15 @@ public class GuestService {
             gender = Gender.FEMALE;
         }
 
-        return repository.createNewGuest(firstName, lastName, age, gender);
+        return this.repository.createNewGuest(firstName, lastName, age, gender);
     }
 
     public List<Guest> getAllGuests() {
 
         return this.repository.getAll();
+    }
+
+    public void saveAll() {
+        this.repository.saveAll();
     }
 }

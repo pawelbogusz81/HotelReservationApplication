@@ -1,12 +1,19 @@
 package pl.pawelbogusz81.domain.room;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RoomRepository {
 
-    public RoomRepository() {
-    }
+    private final List<Room> rooms = new ArrayList<>();
 
     Room createNewRoom(int number, BedType[] bedType) {
+        Room newRoom = new Room(number, bedType);
+        rooms.add(newRoom);
+        return newRoom;
+    }
 
-        return new Room(number, bedType);
+    List<Room> getAll() {
+        return rooms;
     }
 }

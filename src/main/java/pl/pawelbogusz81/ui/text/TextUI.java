@@ -129,11 +129,24 @@ public class TextUI {
             } else if (option == 3) {
                 System.out.println("Wypisywanie wszystkich gości...");
                 showAllGuest();
+            } else if (option == 4) {
+                System.out.println("Wypisywanie wszystkich pokoi...");
+                showAllRooms();
             } else if (option == 0) {
-                System.out.println("Wychodzę z aplikacji");
+                System.out.println("Zapisuję i wychodzę z aplikacji");
+                this.guestService.saveAll();
             } else {
                 throw new WrongOptionException("Wrong option in main menu.");
             }
+        }
+    }
+
+    private void showAllRooms() {
+        System.out.println("Lista pokoi w hotelu:");
+        List<Room> rooms= this.roomService.getAllRooms();
+
+        for (Room room : rooms) {
+            System.out.println(room.getInfo());
         }
     }
 
@@ -152,7 +165,8 @@ public class TextUI {
         System.out.println("\t1. Dodaj nowego gościa.");
         System.out.println("\t2. Dodaj nowy pokój.");
         System.out.println("\t3. Wypisz wszystkich gości.");
-        System.out.println("\t0. Wyjście z aplikacji.");
+        System.out.println("\t4. Wypisz wszystkie pokoje.");
+        System.out.println("\t0. Zapisz i wyjdź z aplikacji.");
         System.out.print("Wybierz opcję: ");
 
         int actionNumber;

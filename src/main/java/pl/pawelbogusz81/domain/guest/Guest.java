@@ -16,7 +16,11 @@ public class Guest {
     }
 
     public final String getInfo() {
-        return String.format("\t%s %s (%d, %s)", firstName, lastName, age, gender);
+        return String.format("\t%s %s (%d, %s)", this.firstName, this.lastName, this.age, this.gender);
+    }
+
+    String toCSV() {
+         return String.format("%s,%s,%d,%s\n", this.firstName, this.lastName, this.age, this.gender);
     }
 
 }

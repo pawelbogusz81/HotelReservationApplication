@@ -16,10 +16,7 @@ public class Room {
 
         for (BedType bed : beds) {
             bedInfo.append("\t").append(bed).append("\n");
-
         }
-        return String.format("Utworzono nowy pokój - numer: %d, %s", this.number, bedInfo);
-
+        return String.format("Pokój numer: %d, %s", this.number, bedInfo);
     }
-
 }
