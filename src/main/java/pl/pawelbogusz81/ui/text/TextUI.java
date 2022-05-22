@@ -97,6 +97,7 @@ public class TextUI {
 
         System.out.println("Trwa wczytywanie danych...");
         this.guestService.readAll();
+        this.roomService.readAll();
 
         Scanner input = new Scanner(System.in);
 
@@ -138,6 +139,7 @@ public class TextUI {
             } else if (option == 0) {
                 System.out.println("Zapisuję i wychodzę z aplikacji");
                 this.guestService.saveAll();
+                this.roomService.saveAll();
             } else {
                 throw new WrongOptionException("Wrong option in main menu.");
             }
