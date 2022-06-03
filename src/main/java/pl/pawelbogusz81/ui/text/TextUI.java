@@ -1,5 +1,6 @@
 package pl.pawelbogusz81.ui.text;
 
+import pl.pawelbogusz81.exceptions.IOCustomException;
 import pl.pawelbogusz81.exceptions.OnlyNumberException;
 import pl.pawelbogusz81.exceptions.WrongOptionException;
 import pl.pawelbogusz81.domain.guest.Guest;
@@ -90,7 +91,6 @@ public class TextUI {
         System.out.println("Witam w systemie rezerwacji dla hotelu: " + Properties.HOTEL_NAME);
         System.out.println("Aktualna wersja systemu: " + Properties.SYSTEM_VERSION);
         System.out.println("Wersja developerska: " + Properties.IS_DEVELOPER_VERSION);
-
         System.out.println("\n=========================\n");
     }
 
@@ -104,7 +104,7 @@ public class TextUI {
 
         try {
             performAction(input);
-        } catch (WrongOptionException | OnlyNumberException e) {
+        } catch (WrongOptionException | OnlyNumberException | IOCustomException e) {
             System.out.println("Wystąpił niespodziewany błąd.");
             System.out.println("Kod błędu: " + e.getCode());
             System.out.println("Komunikat błędu: " + e.getMessage());

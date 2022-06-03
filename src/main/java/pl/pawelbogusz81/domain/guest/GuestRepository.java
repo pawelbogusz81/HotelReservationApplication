@@ -1,5 +1,6 @@
 package pl.pawelbogusz81.domain.guest;
 
+import pl.pawelbogusz81.exceptions.IOCustomException;
 import pl.pawelbogusz81.util.Properties;
 
 import java.io.IOException;
@@ -37,7 +38,7 @@ public class GuestRepository {
         try {
             Files.writeString(file, stringBuilder.toString(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOCustomException(file.toString(), "Saving guests file error", "Guest data");
         }
     }
 
@@ -58,8 +59,8 @@ public class GuestRepository {
             }
 
         } catch (IOException e) {
-            System.out.println("Nie udało się odczytać pliku z danymi.");
-            e.printStackTrace();
+            throw new IOCustomException(file.toString(), "Reading file error", "Guest data");
+
         }
     }
 }
