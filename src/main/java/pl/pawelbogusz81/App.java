@@ -1,6 +1,9 @@
 package pl.pawelbogusz81;
 
 import pl.pawelbogusz81.ui.text.TextUI;
+import pl.pawelbogusz81.util.Properties;
+
+import java.io.IOException;
 
 public class App {
 
@@ -8,11 +11,12 @@ public class App {
 
     public static void main(String[] args) {
 
-        String hotelName = "Overlook";
-        int systemVersion = 2;
-        boolean isDeveloperVersion = true;
-
-        textUI.showSystemInfo(hotelName, systemVersion, isDeveloperVersion);
+        try {
+            Properties.createDataDirectory();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        textUI.showSystemInfo();
         textUI.showMainMenu();
     }
 }

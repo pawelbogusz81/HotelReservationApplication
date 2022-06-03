@@ -1,5 +1,7 @@
 package pl.pawelbogusz81.domain.room;
 
+import pl.pawelbogusz81.util.Properties;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -24,7 +26,7 @@ public class RoomRepository {
 
     void saveAll() {
         String name = "rooms.csv";
-        Path file = Paths.get(System.getProperty("user.home"), "Reservation_system", name);
+        Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Room room : this.rooms) {
@@ -32,10 +34,6 @@ public class RoomRepository {
         }
 
         try {
-            Path reservation_system_dir = Paths.get(System.getProperty("user.home"), "Reservation_system");
-            if (!Files.isDirectory(reservation_system_dir)) {
-                Files.createDirectory(reservation_system_dir);
-            }
             Files.writeString(file, stringBuilder.toString(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +43,7 @@ public class RoomRepository {
     void readAll() {
 
         String name = "rooms.csv";
-        Path file = Paths.get(System.getProperty("user.home"), "Reservation_system", name);
+        Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
 
         try {
             String data = Files.readString(file, StandardCharsets.UTF_8);
@@ -55,11 +53,11 @@ public class RoomRepository {
                 String[] roomData = roomAsString.split(",");
                 int number = Integer.parseInt(roomData[0]);
                 String bedTypesData = roomData[1];
-                String[] bedTypesAsArray = bedTypesData.split("#");
-                BedType[] bedTypes = new BedType[bedTypesAsArray.length];
+                String[] bedTypesAsString = bedTypesData.split("#");
+                BedType[] bedTypes = new BedType[bedTypesAsString.length];
 
                 for (int i = 0; i < bedTypes.length; i++) {
-                    bedTypes[i] = BedType.valueOf(bedTypesAsArray[i]);
+                    bedTypes[i] = BedType.valueOf(bedTypesAsString[i]);
                 }
 
                 createNewRoom(number, bedTypes);

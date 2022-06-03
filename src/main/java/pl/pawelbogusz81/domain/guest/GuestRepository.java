@@ -1,5 +1,7 @@
 package pl.pawelbogusz81.domain.guest;
 
+import pl.pawelbogusz81.util.Properties;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -25,7 +27,7 @@ public class GuestRepository {
 
     void saveAll() {
         String name = "guests.csv";
-        Path file = Paths.get(System.getProperty("user.home"), "Reservation_system", name);
+        Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Guest guest : this.guests) {
@@ -33,10 +35,6 @@ public class GuestRepository {
         }
 
         try {
-            Path reservation_system_dir = Paths.get(System.getProperty("user.home"), "Reservation_system");
-            if (!Files.isDirectory(reservation_system_dir)) {
-                Files.createDirectory(reservation_system_dir);
-            }
             Files.writeString(file, stringBuilder.toString(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +44,7 @@ public class GuestRepository {
     void readAll() {
 
         String name = "guests.csv";
-        Path file = Paths.get(System.getProperty("user.home"), "Reservation_system", name);
+        Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
 
         try {
             String data = Files.readString(file, StandardCharsets.UTF_8);

@@ -6,6 +6,7 @@ import pl.pawelbogusz81.domain.guest.Guest;
 import pl.pawelbogusz81.domain.guest.GuestService;
 import pl.pawelbogusz81.domain.room.Room;
 import pl.pawelbogusz81.domain.room.RoomService;
+import pl.pawelbogusz81.util.Properties;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -84,11 +85,11 @@ public class TextUI {
 
     }
 
-    public void showSystemInfo(String hotelName, int systemVersion, boolean isDeveloperVersion) {
+    public void showSystemInfo() {
 
-        System.out.println("Witam w systemie rezerwacji dla hotelu: " + hotelName);
-        System.out.println("Aktualna wersja systemu: " + systemVersion);
-        System.out.println("Wersja developerska: " + isDeveloperVersion);
+        System.out.println("Witam w systemie rezerwacji dla hotelu: " + Properties.HOTEL_NAME);
+        System.out.println("Aktualna wersja systemu: " + Properties.SYSTEM_VERSION);
+        System.out.println("Wersja developerska: " + Properties.IS_DEVELOPER_VERSION);
 
         System.out.println("\n=========================\n");
     }
