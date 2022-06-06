@@ -29,4 +29,8 @@ public class GuestService {
     public void readAll() {
         this.repository.readAll();
     }
+
+    public void removeGuest(int id) {
+        this.repository.remove(id);
+    }
 }

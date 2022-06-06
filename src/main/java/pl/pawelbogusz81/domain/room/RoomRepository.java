@@ -1,5 +1,6 @@
 package pl.pawelbogusz81.domain.room;
 
+import pl.pawelbogusz81.domain.guest.Guest;
 import pl.pawelbogusz81.exceptions.IOCustomException;
 import pl.pawelbogusz81.util.Properties;
 
@@ -16,7 +17,13 @@ public class RoomRepository {
     private final List<Room> rooms = new ArrayList<>();
 
     Room createNewRoom(int number, BedType[] bedType) {
-        Room newRoom = new Room(number, bedType);
+        Room newRoom = new Room(findNewId(), number, bedType);
+        rooms.add(newRoom);
+        return newRoom;
+    }
+
+    Room addNewRoomFromFile(int id, int number, BedType[] bedType) {
+        Room newRoom = new Room(id, number, bedType);
         rooms.add(newRoom);
         return newRoom;
     }
@@ -46,14 +53,19 @@ public class RoomRepository {
         String name = "rooms.csv";
         Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
 
+        if (!Files.exists(file)) {
+            return;
+        }
+
         try {
             String data = Files.readString(file, StandardCharsets.UTF_8);
             String[] roomsAsString = data.split(System.getProperty("line.separator"));
 
             for (String roomAsString : roomsAsString) {
                 String[] roomData = roomAsString.split(",");
-                int number = Integer.parseInt(roomData[0]);
-                String bedTypesData = roomData[1];
+                int id = Integer.parseInt(roomData[0]);
+                int number = Integer.parseInt(roomData[1]);
+                String bedTypesData = roomData[2];
                 String[] bedTypesAsString = bedTypesData.split("#");
                 BedType[] bedTypes = new BedType[bedTypesAsString.length];
 
@@ -61,12 +73,23 @@ public class RoomRepository {
                     bedTypes[i] = BedType.valueOf(bedTypesAsString[i]);
                 }
 
-                createNewRoom(number, bedTypes);
+                addNewRoomFromFile(id, number, bedTypes);
             }
 
         } catch (IOException e) {
             System.out.println("Nie udało się odczytać pliku z danymi.");
             throw new IOCustomException(file.toString(), "Reading file error", "Room data");
         }
+    }
+
+    private int findNewId() {
+
+        int max = 0;
+        for (Room room: this.rooms) {
+            if (room.getId() > max) {
+                max = room.getId();
+            }
+        }
+        return max + 1;
     }
 }
