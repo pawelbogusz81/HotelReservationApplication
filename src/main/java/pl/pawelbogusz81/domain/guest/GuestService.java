@@ -33,4 +33,15 @@ public class GuestService {
     public void removeGuest(int id) {
         this.repository.remove(id);
     }
+
+    public void editGuest(int id, String firstName, String lastName, int age, boolean isFemale) {
+
+        Gender gender = Gender.MALE;
+
+        if (isFemale) {
+            gender = Gender.FEMALE;
+        }
+
+        this.repository.edit(id, firstName, lastName, age, gender);
+    }
 }

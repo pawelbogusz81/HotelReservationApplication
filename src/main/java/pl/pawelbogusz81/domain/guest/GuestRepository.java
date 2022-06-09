@@ -22,7 +22,7 @@ public class GuestRepository {
         return newGuest;
     }
 
-    Guest addNewGuestFromFile(int id, String firstName, String lastName, int age, Gender gender) {
+    Guest addExistingGuest(int id, String firstName, String lastName, int age, Gender gender) {
 
         Guest newGuest = new Guest(id, firstName, lastName, age, gender);
         guests.add(newGuest);
@@ -67,7 +67,7 @@ public class GuestRepository {
                 int id = Integer.parseInt(guestData[0]);
                 int age = Integer.parseInt(guestData[3]);
                 Gender gender = Gender.valueOf(guestData[4]);
-                addNewGuestFromFile(id, guestData[1], guestData[2], age, gender);
+                addExistingGuest(id, guestData[1], guestData[2], age, gender);
             }
 
         } catch (IOException e) {
@@ -101,5 +101,11 @@ public class GuestRepository {
         if (guestToBeRemovedIndex > -1) {
             this.guests.remove(guestToBeRemovedIndex);
         }
+    }
+
+    public void edit(int id, String firstName, String lastName, int age, Gender gender) {
+
+        this.remove(id);
+        this.addExistingGuest(id, firstName, lastName, age, gender);
     }
 }

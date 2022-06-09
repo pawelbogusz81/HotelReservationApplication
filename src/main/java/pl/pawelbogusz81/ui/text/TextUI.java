@@ -140,6 +140,9 @@ public class TextUI {
             } else if (option == 5) {
                 System.out.println("Usuwanie gości z bazy...");
                 removeGuest(input);
+            } else if (option == 6) {
+                System.out.println("Edycja gości z bazy...");
+                editGuest(input);
             } else if (option == 0) {
                 System.out.println("Zapisuję i wychodzę z aplikacji");
                 this.guestService.saveAll();
@@ -147,6 +150,44 @@ public class TextUI {
             } else {
                 throw new WrongOptionException("Wrong option in main menu.");
             }
+        }
+    }
+
+    private void editGuest(Scanner input) {
+        System.out.print("Podaj ID gościa do edycji:");
+        try {
+            int id = input.nextInt();
+
+                System.out.print("Podaj swoje imię: ");
+                String firstName = input.next();
+                System.out.print("Podaj swoje nazwisko: ");
+                String lastName = input.next();
+                System.out.print("Podaj swój wiek: ");
+                int age = input.nextInt();
+
+                System.out.println("Podaj swoją płeć: ");
+                System.out.println("\t1. Kobieta (FEMALE)");
+                System.out.println("\t2. Mężczyzna (MALE)");
+                System.out.print("Twoja płeć to: ");
+
+                int genderOption = input.nextInt();
+                boolean isFemale;
+
+                if (genderOption == 1) {
+                    isFemale = true;
+                } else if (genderOption == 2) {
+                    isFemale = false;
+                } else {
+                    throw new WrongOptionException("Wrong option in gender menu.");
+                }
+
+                guestService.editGuest(id, firstName, lastName, age, isFemale);
+
+
+
+
+        } catch (InputMismatchException e) {
+            throw new OnlyNumberException("Use only numbers while choosing ID modified Guest");
         }
     }
 
@@ -162,7 +203,7 @@ public class TextUI {
 
     private void showAllRooms() {
         System.out.println("Lista pokoi w hotelu:");
-        List<Room> rooms= this.roomService.getAllRooms();
+        List<Room> rooms = this.roomService.getAllRooms();
 
         for (Room room : rooms) {
             System.out.println(room.getInfo());
@@ -172,9 +213,9 @@ public class TextUI {
     private void showAllGuest() {
 
         System.out.println("Lista gości w hotelu:");
-        List<Guest> guests =  this.guestService.getAllGuests();
+        List<Guest> guests = this.guestService.getAllGuests();
 
-        for (Guest guest : guests){
+        for (Guest guest : guests) {
             System.out.println(guest.getInfo());
         }
     }
@@ -186,6 +227,7 @@ public class TextUI {
         System.out.println("\t3. Wypisz wszystkich gości.");
         System.out.println("\t4. Wypisz wszystkie pokoje.");
         System.out.println("\t5. Usuwanie gościa.");
+        System.out.println("\t6. Edycja gościa.");
         System.out.println("\t0. Zapisz i wyjdź z aplikacji.");
         System.out.print("Wybierz opcję: ");
 
