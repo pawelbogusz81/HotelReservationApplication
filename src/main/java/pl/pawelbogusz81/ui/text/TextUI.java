@@ -1,5 +1,7 @@
 package pl.pawelbogusz81.ui.text;
 
+import pl.pawelbogusz81.domain.reservation.Reservation;
+import pl.pawelbogusz81.domain.reservation.ReservationService;
 import pl.pawelbogusz81.exceptions.IOCustomException;
 import pl.pawelbogusz81.exceptions.OnlyNumberException;
 import pl.pawelbogusz81.exceptions.WrongOptionException;
@@ -9,6 +11,7 @@ import pl.pawelbogusz81.domain.room.Room;
 import pl.pawelbogusz81.domain.room.RoomService;
 import pl.pawelbogusz81.util.Properties;
 
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +20,7 @@ public class TextUI {
 
     private final GuestService guestService = new GuestService();
     private final RoomService roomService = new RoomService();
+    private final ReservationService reservationService = new ReservationService();
 
     private void readNewGuestData(Scanner input) {
 
@@ -149,7 +153,10 @@ public class TextUI {
             } else if (option == 8) {
                 System.out.println("Edycja pokoju z bazy...");
                 editRoom(input);
-            } else if (option == 0) {
+            } else if (option == 9) {
+                System.out.println("Tworzenie rezerwacji...");
+                createReservation(input);
+            }  else if (option == 0) {
                 System.out.println("Zapisuję i wychodzę z aplikacji");
                 this.guestService.saveAll();
                 this.roomService.saveAll();
@@ -157,6 +164,27 @@ public class TextUI {
                 throw new WrongOptionException("Wrong option in main menu.");
             }
         }
+    }
+
+    private void createReservation(Scanner input) {
+        System.out.print("Od kiedy (DD.MM.YYYY): ");
+        String fromAsString = input.next();
+        LocalDate from = LocalDate.parse(fromAsString, Properties.DATE_FORMATTER);
+
+        System.out.print("Do kiedy (DD.MM.YYYY): ");
+        String toAsString = input.next();
+        LocalDate to = LocalDate.parse(toAsString, Properties.DATE_FORMATTER);
+
+        System.out.print("ID pokoju: ");
+        int roomId = input.nextInt();
+        System.out.print("ID gościa: ");
+        int guestId = input.nextInt();
+
+        Reservation res = this.reservationService.createReservation(from, to, roomId, guestId);
+        if (res != null) {
+            System.out.println("Rezerwacja została utworzona.");
+        }
+
     }
 
     private void editRoom(Scanner input) {
@@ -262,6 +290,7 @@ public class TextUI {
         System.out.println("\t6. Edycja gościa.");
         System.out.println("\t7. Usuwanie pokoju.");
         System.out.println("\t8. Edycja pokoju.");
+        System.out.println("\t9. Tworzenie rezerwacji.");
         System.out.println("\t0. Zapisz i wyjdź z aplikacji.");
         System.out.print("Wybierz opcję: ");
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class GuestService {
 
-    private final GuestRepository repository = new GuestRepository();
+    private final static  GuestRepository roomRepository = new GuestRepository();
 
     public Guest createNewGuest(String firstName, String lastName, int age, boolean isFemale) {
 
@@ -14,24 +14,24 @@ public class GuestService {
             gender = Gender.FEMALE;
         }
 
-        return this.repository.createNewGuest(firstName, lastName, age, gender);
+        return roomRepository.createNewGuest(firstName, lastName, age, gender);
     }
 
     public List<Guest> getAllGuests() {
 
-        return this.repository.getAll();
+        return roomRepository.getAll();
     }
 
     public void saveAll() {
-        this.repository.saveAll();
+        roomRepository.saveAll();
     }
 
     public void readAll() {
-        this.repository.readAll();
+        roomRepository.readAll();
     }
 
     public void removeGuest(int id) {
-        this.repository.remove(id);
+        roomRepository.remove(id);
     }
 
     public void editGuest(int id, String firstName, String lastName, int age, boolean isFemale) {
@@ -42,6 +42,10 @@ public class GuestService {
             gender = Gender.FEMALE;
         }
 
-        this.repository.edit(id, firstName, lastName, age, gender);
+        roomRepository.edit(id, firstName, lastName, age, gender);
+    }
+
+    public Guest getGuestByID(int guestId) {
+        return roomRepository.findById(guestId);
     }
 }

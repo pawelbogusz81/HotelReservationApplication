@@ -6,7 +6,7 @@ import java.util.List;
 
 public class RoomService {
 
-    private final RoomRepository roomRepository = new RoomRepository();
+    private final static RoomRepository roomRepository = new RoomRepository();
 
     public Room createNewRoom(int number, int[] bedTypesOptions) {
 
@@ -31,19 +31,19 @@ public class RoomService {
     }
 
     public List<Room> getAllRooms() {
-        return this.roomRepository.getAll();
+        return roomRepository.getAll();
     }
 
     public void saveAll() {
-        this.roomRepository.saveAll();
+        roomRepository.saveAll();
     }
 
     public void readAll() {
-        this.roomRepository.readAll();
+        roomRepository.readAll();
     }
 
     public void removeRoom(int id) {
-        this.roomRepository.remove(id);
+        roomRepository.remove(id);
     }
 
     public void editRoom(int id, int number, int[] bedTypesOptions) {
@@ -66,5 +66,9 @@ public class RoomService {
         }
 
         roomRepository.edit(id, number, bedTypes);
+    }
+
+    public Room getRoomByID(int roomId) {
+        return roomRepository.getRoomById(roomId);
     }
 }

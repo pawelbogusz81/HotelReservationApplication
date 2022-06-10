@@ -112,4 +112,13 @@ public class RoomRepository {
         this.addExistingRoom(id, number, bedTypes);
 
     }
+
+    public Room getRoomById(int roomId) {
+        for (Room room : this.rooms) {
+            if (room.getId() == roomId) {
+                return room;
+            }
+        }
+        return null;
+    }
 }

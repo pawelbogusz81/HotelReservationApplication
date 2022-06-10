@@ -60,9 +60,9 @@ public class GuestRepository {
 
         try {
             String data = Files.readString(file, StandardCharsets.UTF_8);
-            String[] guestsAsString= data.split(System.getProperty("line.separator"));
+            String[] guestsAsString = data.split(System.getProperty("line.separator"));
 
-            for (String guestAsString : guestsAsString){
+            for (String guestAsString : guestsAsString) {
                 String[] guestData = guestAsString.split(",");
                 int id = Integer.parseInt(guestData[0]);
                 int age = Integer.parseInt(guestData[3]);
@@ -79,7 +79,7 @@ public class GuestRepository {
     private int findNewId() {
 
         int max = 0;
-        for (Guest guest: this.guests) {
+        for (Guest guest : this.guests) {
             if (guest.getId() > max) {
                 max = guest.getId();
             }
@@ -91,7 +91,7 @@ public class GuestRepository {
 
         int guestToBeRemovedIndex = -1;
 
-        for (int i=0; i<this.guests.size(); i++) {
+        for (int i = 0; i < this.guests.size(); i++) {
             if (this.guests.get(i).getId() == id) {
                 guestToBeRemovedIndex = i;
                 break;
@@ -107,5 +107,14 @@ public class GuestRepository {
 
         this.remove(id);
         this.addExistingGuest(id, firstName, lastName, age, gender);
+    }
+
+    public Guest findById(int guestId) {
+        for (Guest guest : guests) {
+            if (guest.getId() == guestId) {
+                return guest;
+            }
+        }
+        return null;
     }
 }
