@@ -1,6 +1,5 @@
 package pl.pawelbogusz81.domain.room;
 
-import pl.pawelbogusz81.domain.guest.Guest;
 import pl.pawelbogusz81.exceptions.IOCustomException;
 import pl.pawelbogusz81.util.Properties;
 
@@ -22,7 +21,7 @@ public class RoomRepository {
         return newRoom;
     }
 
-    Room addNewRoomFromFile(int id, int number, BedType[] bedType) {
+    Room addExistingRoom(int id, int number, BedType[] bedType) {
         Room newRoom = new Room(id, number, bedType);
         rooms.add(newRoom);
         return newRoom;
@@ -73,7 +72,7 @@ public class RoomRepository {
                     bedTypes[i] = BedType.valueOf(bedTypesAsString[i]);
                 }
 
-                addNewRoomFromFile(id, number, bedTypes);
+                addExistingRoom(id, number, bedTypes);
             }
 
         } catch (IOException e) {
@@ -91,5 +90,26 @@ public class RoomRepository {
             }
         }
         return max + 1;
+    }
+
+    public void remove(int id) {
+
+        int roomToBeRemovedIndex = -1;
+        for (int i=0; i<this.rooms.size(); i++) {
+            if (this.rooms.get(i).getId() == id) {
+                roomToBeRemovedIndex = i;
+                break;
+            }
+        }
+        if (roomToBeRemovedIndex > -1) {
+            this.rooms.remove(roomToBeRemovedIndex);
+        }
+    }
+
+    public void edit(int id, int number, BedType[] bedTypes) {
+
+        this.remove(id);
+        this.addExistingRoom(id, number, bedTypes);
+
     }
 }
