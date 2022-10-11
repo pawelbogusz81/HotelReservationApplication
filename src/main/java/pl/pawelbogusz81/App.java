@@ -19,5 +19,6 @@ public class App {
         }
         textUI.showSystemInfo();
         textUI.showMainMenu();
+        //testowy komentarz
     }
 }
