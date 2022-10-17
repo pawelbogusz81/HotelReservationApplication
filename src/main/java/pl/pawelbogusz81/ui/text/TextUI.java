@@ -103,6 +103,7 @@ public class TextUI {
         System.out.println("Trwa wczytywanie danych...");
         this.guestService.readAll();
         this.roomService.readAll();
+        this.reservationService.readAll();
 
         Scanner input = new Scanner(System.in);
 
@@ -160,6 +161,7 @@ public class TextUI {
                 System.out.println("Zapisuję i wychodzę z aplikacji");
                 this.guestService.saveAll();
                 this.roomService.saveAll();
+                this.reservationService.saveAll();
             } else {
                 throw new WrongOptionException("Wrong option in main menu.");
             }
@@ -167,6 +169,7 @@ public class TextUI {
     }
 
     private void createReservation(Scanner input) {
+
         System.out.print("Od kiedy (DD.MM.YYYY): ");
         String fromAsString = input.next();
         LocalDate from = LocalDate.parse(fromAsString, Properties.DATE_FORMATTER);
