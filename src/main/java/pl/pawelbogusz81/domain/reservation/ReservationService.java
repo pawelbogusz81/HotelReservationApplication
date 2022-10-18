@@ -26,4 +26,9 @@ public class ReservationService {
 
         return this.repository.createNewReservation(room, guest, fromWithTime, toWithTime);
     }
+
+    public void readAll() { repository.readAll(); }
+
+    public void saveAll() { repository.saveAll(); }
+
 }
