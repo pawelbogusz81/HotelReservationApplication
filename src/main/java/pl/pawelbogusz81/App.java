@@ -3,6 +3,8 @@ package pl.pawelbogusz81;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import pl.pawelbogusz81.exceptions.IOCustomException;
 import pl.pawelbogusz81.ui.text.TextUI;
@@ -29,8 +31,19 @@ public class App extends Application {
     public void start(Stage primaryStage){
         String hotelName = Properties.HOTEL_NAME;
         int systemVersion = Properties.SYSTEM_VERSION;
-        Label l = new Label("Hello JavaFX.");
-        Scene scene = new Scene(l,800,600);
+
+        TabPane tabPane = new TabPane();
+        Tab reservationsTab = new Tab("Rezerwacje", new Label("Obsługa rezerwacji"));
+        Tab roomsTab = new Tab("Pokoje", new Label("Obsługa pokoi"));
+        Tab guestsTab = new Tab("Goście", new Label("Obsługa gości"));
+
+        reservationsTab.setClosable(false);
+        guestsTab.setClosable(false);
+        roomsTab.setClosable(false);
+
+        tabPane.getTabs().addAll(reservationsTab, guestsTab, roomsTab);
+
+        Scene scene = new Scene(tabPane,800,600);
         String title = String.format("System rezerwacji hotelu %s (ver. %d)", hotelName, systemVersion);
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
