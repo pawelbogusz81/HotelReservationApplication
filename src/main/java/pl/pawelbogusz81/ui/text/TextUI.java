@@ -183,10 +183,15 @@ public class TextUI {
         System.out.print("ID gościa: ");
         int guestId = input.nextInt();
 
-        Reservation res = this.reservationService.createReservation(from, to, roomId, guestId);
-        if (res != null) {
-            System.out.println("Rezerwacja została utworzona.");
+        try{
+            Reservation res = this.reservationService.createReservation(from, to, roomId, guestId);
+            if (res != null) {
+                System.out.println("Rezerwacja została utworzona.");
+            }
+        } catch (IllegalArgumentException e){
+            System.out.println("Data rozpoczęcia musi być wcześniejsza jak data zakończenia.");
         }
+
 
     }
 
