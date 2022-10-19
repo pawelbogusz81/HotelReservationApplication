@@ -1,7 +1,9 @@
 package pl.pawelbogusz81.domain.room;
 
+import pl.pawelbogusz81.domain.room.dto.RoomDTO;
 import pl.pawelbogusz81.exceptions.WrongOptionException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomService {
@@ -70,5 +72,16 @@ public class RoomService {
 
     public Room getRoomByID(int roomId) {
         return roomRepository.getRoomById(roomId);
+    }
+
+    public List<RoomDTO> getAllAsDTO() {
+        List<RoomDTO> result = new ArrayList<>();
+        List<Room> allRooms = roomRepository.getAll();
+
+        for (Room room : allRooms) {
+            RoomDTO dto = room.generateDTO();
+            result.add(dto);
+        }
+        return result;
     }
 }
