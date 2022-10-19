@@ -1,14 +1,12 @@
 package pl.pawelbogusz81;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import pl.pawelbogusz81.domain.guest.GuestService;
+import pl.pawelbogusz81.domain.reservation.ReservationService;
+import pl.pawelbogusz81.domain.room.RoomService;
 import pl.pawelbogusz81.exceptions.IOCustomException;
 import pl.pawelbogusz81.ui.gui.PrimaryStage;
-import pl.pawelbogusz81.ui.text.TextUI;
 import pl.pawelbogusz81.util.Properties;
 
 import java.io.IOException;
@@ -16,11 +14,18 @@ import java.io.IOException;
 public class App extends Application {
 
 //    private static final TextUI textUI = new TextUI();
+    private static final GuestService guestService = new GuestService();
+    private static final RoomService roomService = new RoomService();
+    private static final ReservationService reservationService = new ReservationService();
 
     public static void main(String[] args) {
 
         try {
             Properties.createDataDirectory();
+            System.out.println("Trwa wczytywanie danych...");
+            guestService.readAll();
+            roomService.readAll();
+            reservationService.readAll();
         } catch (IOException e) {
             throw new IOCustomException(Properties.DATA_DIRECTORY.toString(), "Creating directory", "Creating data directory error");
         }
