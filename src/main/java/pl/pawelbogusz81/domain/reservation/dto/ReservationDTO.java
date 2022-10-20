@@ -7,10 +7,10 @@ public class ReservationDTO {
     private int id;
     private String roomInfo;
     private String guestInfo;
-    private LocalDateTime from;
-    private LocalDateTime to;
+    private String from;
+    private String to;
 
-    public ReservationDTO(int id, String roomInfo, String guestName, LocalDateTime from, LocalDateTime to) {
+    public ReservationDTO(int id, String roomInfo, String guestName, String from, String to) {
         this.id = id;
         this.roomInfo = roomInfo;
         this.guestInfo = guestName;
@@ -30,11 +30,11 @@ public class ReservationDTO {
         return guestInfo;
     }
 
-    public LocalDateTime getFrom() {
+    public String getFrom() {
         return from;
     }
 
-    public LocalDateTime getTo() {
+    public String getTo() {
         return to;
     }
 }

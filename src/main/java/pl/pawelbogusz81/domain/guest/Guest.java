@@ -1,5 +1,7 @@
 package pl.pawelbogusz81.domain.guest;
 
+import pl.pawelbogusz81.domain.guest.dto.GuestDTO;
+
 public class Guest {
 
 
@@ -36,4 +38,7 @@ public class Guest {
                 System.getProperty("line.separator"));
     }
 
+    public GuestDTO generateDTO() {
+        return new GuestDTO(this.id, this.firstName, this.lastName, this.age, this.gender.toString());
+    }
 }

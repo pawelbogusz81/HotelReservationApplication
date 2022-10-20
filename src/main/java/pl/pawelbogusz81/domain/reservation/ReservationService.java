@@ -5,7 +5,6 @@ import pl.pawelbogusz81.domain.guest.GuestService;
 import pl.pawelbogusz81.domain.reservation.dto.ReservationDTO;
 import pl.pawelbogusz81.domain.room.Room;
 import pl.pawelbogusz81.domain.room.RoomService;
-import pl.pawelbogusz81.domain.room.dto.RoomDTO;
 import pl.pawelbogusz81.util.Properties;
 
 import java.time.LocalDate;

@@ -6,7 +6,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import pl.pawelbogusz81.domain.reservation.ReservationService;
 import pl.pawelbogusz81.domain.reservation.dto.ReservationDTO;
-import pl.pawelbogusz81.domain.room.dto.RoomDTO;
 
 import java.util.List;
 
