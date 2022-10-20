@@ -1,6 +1,7 @@
 package pl.pawelbogusz81.domain.reservation;
 
 import pl.pawelbogusz81.domain.guest.Guest;
+import pl.pawelbogusz81.domain.reservation.dto.ReservationDTO;
 import pl.pawelbogusz81.domain.room.Room;
 
 import java.time.LocalDateTime;
@@ -34,5 +35,9 @@ public class Reservation {
 
     public int getId() {
         return this.id;
+    }
+
+    public ReservationDTO generateDTO (){
+        return new ReservationDTO(this.id, this.room.getInfo(), this.guest.getInfo(), this.from, this.to);
     }
 }
