@@ -15,7 +15,7 @@ public class ReservationService {
     private final GuestService guestService = new GuestService();
     private final ReservationRepository repository = new ReservationRepository();
 
-    public Reservation createReservation(LocalDate from, LocalDate to, int roomId, int guestId) {
+    public Reservation createReservation(LocalDate from, LocalDate to, int roomId, int guestId) throws IllegalArgumentException{
 
         //TODO
         Room room = this.roomService.getRoomByID(roomId);
@@ -23,6 +23,10 @@ public class ReservationService {
 
         LocalDateTime fromWithTime = from.atTime(Properties.HOTEL_NIGHT_START_HOUR, Properties.HOTEL_NIGHT_START_MINUTE);
         LocalDateTime toWithTime = to.atTime(Properties.HOTEL_NIGHT_END_HOUR, Properties.HOTEL_NIGHT_END_MINUTE);
+
+        if (toWithTime.isBefore(fromWithTime)){
+            throw new IllegalArgumentException();
+        }
 
         return this.repository.createNewReservation(room, guest, fromWithTime, toWithTime);
     }

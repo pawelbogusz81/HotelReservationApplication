@@ -77,6 +77,11 @@ public class ReservationRepository {
 
             for (String reservationAsString : reservationsAsString) {
                 String[] reservationData = reservationAsString.split(",");
+
+                if (reservationData[0] == null || reservationData[0].trim().isEmpty()){
+                    continue;
+                }
+
                 int id = Integer.parseInt(reservationData[0]);
                 int roomID = Integer.parseInt(reservationData[1]);
                 int guestID = Integer.parseInt(reservationData[2]);

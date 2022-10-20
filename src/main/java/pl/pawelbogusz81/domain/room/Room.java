@@ -1,5 +1,7 @@
 package pl.pawelbogusz81.domain.room;
 
+import pl.pawelbogusz81.domain.room.dto.RoomDTO;
+
 public class Room {
 
     private final int id;
@@ -28,11 +30,7 @@ public class Room {
 
     String toCSV() {
 
-        String[] bedsAsString = new String[this.beds.length];
-
-        for (int i = 0; i < this.beds.length; i++){
-            bedsAsString[i] = this.beds[i].toString();
-        }
+        String[] bedsAsString = getBedsAsString();
 
         String bedTypes = String.join("#", bedsAsString);
 
@@ -43,4 +41,20 @@ public class Room {
                 System.getProperty("line.separator"));
     }
 
+    private String[] getBedsAsString() {
+        String[] bedsAsString = new String[this.beds.length];
+
+        for (int i = 0; i < this.beds.length; i++) {
+            bedsAsString[i] = this.beds[i].toString();
+        }
+        return bedsAsString;
+    }
+
+    public RoomDTO generateDTO() {
+
+        String[] bedsAsString = getBedsAsString();
+        String bedTypes = String.join(",", bedsAsString);
+
+        return new RoomDTO(this.id, this.number, bedTypes);
+    }
 }
