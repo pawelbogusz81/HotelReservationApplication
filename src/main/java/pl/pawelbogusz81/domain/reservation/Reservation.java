@@ -38,6 +38,6 @@ public class Reservation {
     }
 
     public ReservationDTO generateDTO (){
-        return new ReservationDTO(this.id, this.room.getInfo(), this.guest.getInfo(), this.from.toString(), this.to.toString());
+        return new ReservationDTO(this.id, this.room.getRoomInfo(), this.guest.getGuestInfo(), this.from.toString(), this.to.toString());
     }
 }

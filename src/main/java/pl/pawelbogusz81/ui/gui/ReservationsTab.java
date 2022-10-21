@@ -19,19 +19,26 @@ public class ReservationsTab {
         TableView<ReservationDTO> tableView = new TableView();
 
         //pole "room"
-        TableColumn<ReservationDTO, String> roomInfo= new TableColumn<>("Pokój");
-        roomInfo.setCellValueFactory(new PropertyValueFactory<>("roomInfo"));
+        TableColumn<ReservationDTO, String> roomInfoColumn = new TableColumn<>("Pokój");
+        roomInfoColumn.setCellValueFactory(new PropertyValueFactory<>("roomInfo"));
 
         //pole "guest"
-        TableColumn<ReservationDTO, String> guestInfo= new TableColumn<>("Gość");
-        guestInfo.setCellValueFactory(new PropertyValueFactory<>("guestInfo"));
+        TableColumn<ReservationDTO, String> guestInfoColumn = new TableColumn<>("Gość");
+        guestInfoColumn.setCellValueFactory(new PropertyValueFactory<>("guestInfo"));
 
         //pole "id"
         TableColumn<ReservationDTO, Integer> idColumn= new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
+        //pole "od"
+        TableColumn<ReservationDTO, String> fromColumn= new TableColumn<>("Od");
+        fromColumn.setCellValueFactory(new PropertyValueFactory<>("from"));
 
-        tableView.getColumns().addAll(idColumn, roomInfo, guestInfo);
+        //pole "do"
+        TableColumn<ReservationDTO, String> toColumn= new TableColumn<>("Do");
+        toColumn.setCellValueFactory(new PropertyValueFactory<>("to"));
+
+        tableView.getColumns().addAll(idColumn, roomInfoColumn, guestInfoColumn, fromColumn, toColumn);
 
         List<ReservationDTO> allAsDTO = reservationService.getAllAsDTO();
 

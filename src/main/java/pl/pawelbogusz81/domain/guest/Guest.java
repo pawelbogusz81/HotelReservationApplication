@@ -41,4 +41,9 @@ public class Guest {
     public GuestDTO generateDTO() {
         return new GuestDTO(this.id, this.firstName, this.lastName, this.age, this.gender.toString());
     }
+
+    public String getGuestInfo() {
+
+        return String.format("%s %s (%d lat) - %s", this.firstName, this.lastName, this.age, this.gender.toString());
+    }
 }

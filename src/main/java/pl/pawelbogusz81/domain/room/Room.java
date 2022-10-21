@@ -57,4 +57,11 @@ public class Room {
 
         return new RoomDTO(this.id, this.number, bedTypes);
     }
+
+    public String getRoomInfo() {
+        String[] bedsAsString = getBedsAsString();
+        String bedTypes = String.join(",", bedsAsString);
+
+        return String.format("Pokój nr %d, łóżka: %s", this.number, bedTypes);
+    }
 }

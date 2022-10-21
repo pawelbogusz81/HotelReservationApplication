@@ -14,9 +14,9 @@ import java.util.List;
 
 public class ReservationService {
 
-    private final RoomService roomService = new RoomService();
-    private final GuestService guestService = new GuestService();
-    private final ReservationRepository repository = new ReservationRepository();
+    private final static RoomService roomService = new RoomService();
+    private final static GuestService guestService = new GuestService();
+    private final static ReservationRepository repository = new ReservationRepository();
 
     public Reservation createReservation(LocalDate from, LocalDate to, int roomId, int guestId) throws IllegalArgumentException{
 
@@ -40,7 +40,7 @@ public class ReservationService {
 
     public List<ReservationDTO> getAllAsDTO() {
         List<ReservationDTO> result = new ArrayList<>();
-        List<Reservation> allReservations = repository.reservations;
+        List<Reservation> allReservations = repository.getAll();
 
         for (Reservation reservation : allReservations) {
             ReservationDTO dto = reservation.generateDTO();
