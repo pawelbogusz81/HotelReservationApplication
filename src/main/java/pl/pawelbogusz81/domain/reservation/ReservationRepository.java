@@ -93,7 +93,11 @@ public class ReservationRepository {
 
         } catch (IOException e) {
             throw new IOCustomException(file.toString(), "Reading file error", "Guest data");
-
         }
+    }
+
+
+    public List<Reservation> getAll() {
+        return this.reservations;
     }
 }

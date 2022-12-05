@@ -1,5 +1,8 @@
 package pl.pawelbogusz81.domain.guest;
 
+import pl.pawelbogusz81.domain.guest.dto.GuestDTO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class GuestService {
@@ -47,5 +50,17 @@ public class GuestService {
 
     public Guest getGuestByID(int guestId) {
         return guestRepository.findById(guestId);
+    }
+
+    public List<GuestDTO> getAllAsDTO() {
+
+        List<GuestDTO> result = new ArrayList<>();
+        List<Guest> allGuests = guestRepository.getAll();
+
+        for (Guest guest : allGuests) {
+            GuestDTO dto = guest.generateDTO();
+            result.add(dto);
+        }
+        return result;
     }
 }

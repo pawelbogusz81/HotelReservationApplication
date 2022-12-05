@@ -7,11 +7,13 @@ import pl.pawelbogusz81.domain.reservation.ReservationService;
 import pl.pawelbogusz81.domain.room.RoomService;
 import pl.pawelbogusz81.exceptions.IOCustomException;
 import pl.pawelbogusz81.ui.gui.PrimaryStage;
+import pl.pawelbogusz81.ui.text.TextUI;
 import pl.pawelbogusz81.util.Properties;
 
 import java.io.IOException;
 
 public class App extends Application {
+//public class App {
 
 //    private static final TextUI textUI = new TextUI();
     private static final GuestService guestService = new GuestService();
