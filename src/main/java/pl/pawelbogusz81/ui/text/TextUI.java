@@ -1,5 +1,6 @@
 package pl.pawelbogusz81.ui.text;
 
+import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.reservation.Reservation;
 import pl.pawelbogusz81.domain.reservation.ReservationService;
 import pl.pawelbogusz81.exceptions.IOCustomException;
@@ -18,9 +19,9 @@ import java.util.Scanner;
 
 public class TextUI {
 
-    private final GuestService guestService = new GuestService();
-    private final RoomService roomService = new RoomService();
-    private final ReservationService reservationService = new ReservationService();
+    private final GuestService guestService = ObjectPool.getGuestService();
+    private final RoomService roomService = ObjectPool.getRoomService();
+    private final ReservationService reservationService = ObjectPool.getReservationService();
 
     private void readNewGuestData(Scanner input) {
 

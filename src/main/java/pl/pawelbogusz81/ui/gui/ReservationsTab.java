@@ -4,6 +4,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.reservation.ReservationService;
 import pl.pawelbogusz81.domain.reservation.dto.ReservationDTO;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class ReservationsTab {
 
     private Tab reservationTab;
-    private ReservationService reservationService = new ReservationService();
+    private ReservationService reservationService = ObjectPool.getReservationService();
 
     public ReservationsTab() {
 

@@ -2,6 +2,7 @@ package pl.pawelbogusz81;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.guest.GuestService;
 import pl.pawelbogusz81.domain.reservation.ReservationService;
 import pl.pawelbogusz81.domain.room.RoomService;
@@ -16,9 +17,9 @@ public class App extends Application {
 //public class App {
 
 //    private static final TextUI textUI = new TextUI();
-    private static final GuestService guestService = GuestService.getInstance();
-    private static final RoomService roomService = RoomService.getInstance();
-    private static final ReservationService reservationService = ReservationService.getInstance();
+    private static final GuestService guestService = ObjectPool.getGuestService();
+    private static final RoomService roomService = ObjectPool.getRoomService();
+    private static final ReservationService reservationService = ObjectPool.getReservationService();
 
     public static void main(String[] args) {
 

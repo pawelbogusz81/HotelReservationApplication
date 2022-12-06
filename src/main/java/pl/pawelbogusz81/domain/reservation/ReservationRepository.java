@@ -1,5 +1,6 @@
 package pl.pawelbogusz81.domain.reservation;
 
+import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.guest.Gender;
 import pl.pawelbogusz81.domain.guest.Guest;
 import pl.pawelbogusz81.domain.guest.GuestService;
@@ -20,8 +21,8 @@ import java.util.List;
 public class ReservationRepository {
 
     List<Reservation> reservations = new ArrayList<>();
-    RoomService roomService = RoomService.getInstance();
-    GuestService guestService = new GuestService();
+    RoomService roomService = ObjectPool.getRoomService();
+    GuestService guestService = ObjectPool.getGuestService();
 
     private final static ReservationRepository instance = new ReservationRepository();
     private ReservationRepository(){

@@ -1,5 +1,6 @@
 package pl.pawelbogusz81.domain.guest;
 
+import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.guest.dto.GuestDTO;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class GuestService {
 
-    private final GuestRepository guestRepository = GuestRepository.getInstance();
+    private final GuestRepository guestRepository = ObjectPool.getGuestRepository();
 
     private final static GuestService instance = new GuestService();
 
