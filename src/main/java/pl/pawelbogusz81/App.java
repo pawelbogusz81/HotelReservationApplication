@@ -16,9 +16,9 @@ public class App extends Application {
 //public class App {
 
 //    private static final TextUI textUI = new TextUI();
-    private static final GuestService guestService = new GuestService();
-    private static final RoomService roomService = new RoomService();
-    private static final ReservationService reservationService = new ReservationService();
+    private static final GuestService guestService = GuestService.getInstance();
+    private static final RoomService roomService = RoomService.getInstance();
+    private static final ReservationService reservationService = ReservationService.getInstance();
 
     public static void main(String[] args) {
 
