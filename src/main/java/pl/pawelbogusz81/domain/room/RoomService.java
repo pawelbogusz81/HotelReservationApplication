@@ -8,7 +8,13 @@ import java.util.List;
 
 public class RoomService {
 
-    private final static RoomRepository roomRepository = new RoomRepository();
+    private final RoomRepository roomRepository = RoomRepository.getInstance();
+
+    private final static RoomService instance = new RoomService();
+
+    private RoomService(){
+
+    }
 
     public Room createNewRoom(int number, int[] bedTypesOptions) {
 
@@ -83,5 +89,9 @@ public class RoomService {
             result.add(dto);
         }
         return result;
+    }
+
+    public static RoomService getInstance() {
+        return instance;
     }
 }

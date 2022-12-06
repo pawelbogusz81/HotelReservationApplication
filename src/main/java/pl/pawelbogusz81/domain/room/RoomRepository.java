@@ -15,6 +15,16 @@ public class RoomRepository {
 
     private final List<Room> rooms = new ArrayList<>();
 
+    private static final RoomRepository instance = new RoomRepository();
+
+    private RoomRepository(){
+
+    }
+
+    public static RoomRepository getInstance() {
+        return instance;
+    }
+
     Room createNewRoom(int number, BedType[] bedType) {
         Room newRoom = new Room(findNewId(), number, bedType);
         rooms.add(newRoom);
