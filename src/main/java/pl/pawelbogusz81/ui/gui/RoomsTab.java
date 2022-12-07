@@ -1,9 +1,13 @@
 package pl.pawelbogusz81.ui.gui;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.room.RoomService;
 import pl.pawelbogusz81.domain.room.dto.RoomDTO;
@@ -14,7 +18,7 @@ public class RoomsTab {
     private Tab roomTab;
     private RoomService roomService = ObjectPool.getRoomService();
 
-    public RoomsTab() {
+    public RoomsTab(final Stage primaryStage) {
 
         TableView<RoomDTO> tableView = new TableView();
 
@@ -45,7 +49,19 @@ public class RoomsTab {
 
         tableView.getItems().addAll(allAsDTO);
 
-        this.roomTab = new Tab("Pokoje", tableView);
+        Button button = new Button("Dodaj pokój");
+
+        button.setOnAction(event -> {
+            Stage addRoomPopup = new Stage();
+            addRoomPopup.initModality(Modality.WINDOW_MODAL);
+            addRoomPopup.initOwner(primaryStage);
+            addRoomPopup.setTitle("Dodawanie nowego pokoju");
+            addRoomPopup.showAndWait();
+        });
+
+        VBox layout = new VBox(button, tableView);
+
+        this.roomTab = new Tab("Pokoje", layout);
         this.roomTab.setClosable(false);
     }
 

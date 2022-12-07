@@ -12,7 +12,7 @@ public class PrimaryStage {
         String hotelName = Properties.HOTEL_NAME;
         int systemVersion = Properties.SYSTEM_VERSION;
 
-        MainTabView mainTabView = new MainTabView();
+        MainTabView mainTabView = new MainTabView(primaryStage);
 
         TabPane mainTabs = mainTabView.getMainTabs();
 
