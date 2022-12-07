@@ -19,6 +19,27 @@ public class RoomsTab {
 
     public RoomsTab(final Stage primaryStage) {
 
+        TableView<RoomDTO> tableView = getRoomDTOTableView();
+
+        Button button = new Button("Dodaj pokój");
+
+        button.setOnAction(event -> {
+            Stage addRoomPopup = new Stage();
+            addRoomPopup.initModality(Modality.WINDOW_MODAL);
+            addRoomPopup.initOwner(primaryStage);
+
+            addRoomPopup.setScene(new AddNewRoomScene().getMainScene());
+            addRoomPopup.setTitle("Dodawanie nowego pokoju");
+            addRoomPopup.showAndWait();
+        });
+
+        VBox layout = new VBox(button, tableView);
+
+        this.roomTab = new Tab("Pokoje", layout);
+        this.roomTab.setClosable(false);
+    }
+
+    private TableView<RoomDTO> getRoomDTOTableView() {
         TableView<RoomDTO> tableView = new TableView();
 
         //pole "number"
@@ -47,28 +68,7 @@ public class RoomsTab {
         List<RoomDTO> allAsDTO = roomService.getAllAsDTO();
 
         tableView.getItems().addAll(allAsDTO);
-
-        Button button = new Button("Dodaj pokój");
-
-        button.setOnAction(event -> {
-            Stage addRoomPopup = new Stage();
-            addRoomPopup.initModality(Modality.WINDOW_MODAL);
-            Label roomNumberLabel = new Label("Numer pokoju");
-            TextField imputedRoomNumber = new TextField();
-
-            HBox roomNumberRow = new HBox(roomNumberLabel, imputedRoomNumber);
-
-            Scene scene = new Scene(roomNumberRow,800,600);
-            addRoomPopup.setScene(scene);
-            addRoomPopup.initOwner(primaryStage);
-            addRoomPopup.setTitle("Dodawanie nowego pokoju");
-            addRoomPopup.showAndWait();
-        });
-
-        VBox layout = new VBox(button, tableView);
-
-        this.roomTab = new Tab("Pokoje", layout);
-        this.roomTab.setClosable(false);
+        return tableView;
     }
 
     public Tab getRoomTab() {
