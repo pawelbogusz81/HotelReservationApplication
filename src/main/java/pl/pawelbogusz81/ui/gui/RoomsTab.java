@@ -1,10 +1,9 @@
 package pl.pawelbogusz81.ui.gui;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,6 +53,13 @@ public class RoomsTab {
         button.setOnAction(event -> {
             Stage addRoomPopup = new Stage();
             addRoomPopup.initModality(Modality.WINDOW_MODAL);
+            Label roomNumberLabel = new Label("Numer pokoju");
+            TextField imputedRoomNumber = new TextField();
+
+            HBox roomNumberRow = new HBox(roomNumberLabel, imputedRoomNumber);
+
+            Scene scene = new Scene(roomNumberRow,800,600);
+            addRoomPopup.setScene(scene);
             addRoomPopup.initOwner(primaryStage);
             addRoomPopup.setTitle("Dodawanie nowego pokoju");
             addRoomPopup.showAndWait();
