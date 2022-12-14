@@ -14,10 +14,10 @@ import pl.pawelbogusz81.domain.room.dto.RoomDTO;
 import java.util.List;
 
 public class RoomsTab {
-    private Tab roomTab;
-    private RoomService roomService = ObjectPool.getRoomService();
+    private final Tab roomTab;
+    private final RoomService roomService = ObjectPool.getRoomService();
 
-    public RoomsTab(final Stage primaryStage) {
+    public RoomsTab(Stage primaryStage) {
 
         TableView<RoomDTO> tableView = getRoomDTOTableView();
 
@@ -28,7 +28,7 @@ public class RoomsTab {
             addRoomPopup.initModality(Modality.WINDOW_MODAL);
             addRoomPopup.initOwner(primaryStage);
 
-            addRoomPopup.setScene(new AddNewRoomScene().getMainScene());
+            addRoomPopup.setScene(new AddNewRoomScene(addRoomPopup, tableView).getMainScene());
             addRoomPopup.setTitle("Dodawanie nowego pokoju");
             addRoomPopup.showAndWait();
         });

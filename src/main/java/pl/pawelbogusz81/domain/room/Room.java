@@ -8,7 +8,7 @@ public class Room {
     private final int number;
     private final BedType[] beds;
 
-    Room(int id, int number, BedType[] bedType) {
+    public Room(int id, int number, BedType[] bedType) {
         this.id = id;
         this.number = number;
         this.beds = bedType;
@@ -28,7 +28,7 @@ public class Room {
         return String.format("Pokój numer: %d (ID %d), %s", this.number, this.id, bedInfo);
     }
 
-    String toCSV() {
+    public String toCSV() {
 
         String[] bedsAsString = getBedsAsString();
 

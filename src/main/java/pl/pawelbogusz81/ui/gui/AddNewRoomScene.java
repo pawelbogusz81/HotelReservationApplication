@@ -1,12 +1,13 @@
 package pl.pawelbogusz81.ui.gui;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import pl.pawelbogusz81.domain.ObjectPool;
+import pl.pawelbogusz81.domain.room.RoomService;
+import pl.pawelbogusz81.domain.room.dto.RoomDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +16,12 @@ public class AddNewRoomScene {
 
     private final Scene mainScene;
     private final List<ComboBox<String>> comboBoxes = new ArrayList<>();
+    private final RoomService roomService = ObjectPool.getRoomService();
 
-    public AddNewRoomScene(){
+    public AddNewRoomScene(final Stage addRoomPopup, final TableView<RoomDTO> tableView){
 
         Label roomNumberLabel = new Label("Numer pokoju");
-        TextField imputedRoomNumber = new TextField("Wpisz numer pokoju");
+        TextField imputedRoomNumber = new TextField();
         HBox roomNumberRow = new HBox(roomNumberLabel, imputedRoomNumber);
 
         Label bedTypeLabel = new Label("Rodzaje łóżek");
@@ -32,7 +34,26 @@ public class AddNewRoomScene {
 
         addNewBedButton.setOnAction(event -> bedsVerticalBox.getChildren().add(getComboBox()));
 
-        VBox box = new VBox(roomNumberRow, bedsVerticalBox);
+        Button addNewRoomBtn = new Button("Dodaj nowy pokój");
+        addNewRoomBtn.setOnAction(event -> {
+            int newRoomNumber = Integer.parseInt(imputedRoomNumber.getText());
+            List<String> bedTypes = new ArrayList<>();
+
+            this.comboBoxes.forEach(comboBox -> {
+                bedTypes.add(comboBox.getValue());
+            });
+
+            this.roomService.createNewRoom(newRoomNumber, bedTypes);
+
+            tableView.getItems().clear();
+
+            List<RoomDTO> allAsDTO = roomService.getAllAsDTO();
+            tableView.getItems().addAll(allAsDTO);
+
+            addRoomPopup.close();
+        });
+
+        VBox box = new VBox(roomNumberRow, bedsVerticalBox, addNewRoomBtn);
 
         this.mainScene = new Scene(box,640,480);
 
@@ -45,9 +66,7 @@ public class AddNewRoomScene {
         return bedTypeBox;
     }
 
-    Scene getMainScene() {
-
-
+    public Scene getMainScene() {
 
         return mainScene;
     }

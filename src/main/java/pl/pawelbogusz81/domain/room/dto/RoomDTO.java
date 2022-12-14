@@ -7,7 +7,7 @@ public class RoomDTO {
     private int bedsCount;
     private int roomSize;
 
-    public RoomDTO(int id, int number, String beds, final int bedsCount, final int roomSize) {
+    public RoomDTO(int id, int number, String beds, int bedsCount, int roomSize) {
         this.id = id;
         this.number = number;
         this.beds = beds;

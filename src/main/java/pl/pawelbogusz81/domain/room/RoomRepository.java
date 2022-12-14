@@ -25,23 +25,23 @@ public class RoomRepository {
         return instance;
     }
 
-    Room createNewRoom(int number, BedType[] bedType) {
-        Room newRoom = new Room(findNewId(), number, bedType);
+    public Room createNewRoom(int number, BedType[] bedTypes) {
+        Room newRoom = new Room(findNewId(), number, bedTypes);
         rooms.add(newRoom);
         return newRoom;
     }
 
-    Room addExistingRoom(int id, int number, BedType[] bedType) {
+    public Room addExistingRoom(int id, int number, BedType[] bedType) {
         Room newRoom = new Room(id, number, bedType);
         rooms.add(newRoom);
         return newRoom;
     }
 
-    List<Room> getAll() {
+    public List<Room> getAll() {
         return rooms;
     }
 
-    void saveAll() {
+    public void saveAll() {
         String name = "rooms.csv";
         Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
         StringBuilder stringBuilder = new StringBuilder();
@@ -57,7 +57,7 @@ public class RoomRepository {
         }
     }
 
-    void readAll() {
+    public void readAll() {
 
         String name = "rooms.csv";
         Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
