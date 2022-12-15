@@ -1,7 +1,10 @@
 package pl.pawelbogusz81.ui.gui;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -25,7 +28,15 @@ public class AddNewRoomScene {
         HBox roomNumberRow = new HBox(roomNumberLabel, imputedRoomNumber);
 
         Label bedTypeLabel = new Label("Rodzaje łóżek");
-        Button addNewBedButton = new Button("Dodaj");
+        Button addNewBedButton = new Button();
+
+        Image icon = new Image(getClass().getClassLoader().getResourceAsStream("add.jpg"));
+        ImageView imageView = new ImageView(icon);
+        imageView.setFitWidth(16);
+        imageView.setFitHeight(16);
+        addNewBedButton.setGraphic(imageView);
+        addNewBedButton.setPadding(Insets.EMPTY);
+
         HBox bedTypeRow = new HBox(bedTypeLabel, addNewBedButton);
 
         VBox bedsVerticalBox = new VBox(bedTypeRow, getComboBox());
@@ -49,7 +60,6 @@ public class AddNewRoomScene {
             List<RoomDTO> allAsDTO = roomService.getAllAsDTO();
             tableView.getItems().addAll(allAsDTO);
 
-//            System.out.println(roomService.getRoomByID(3).getRoomInfo());
             addRoomPopup.close();
         });
 
