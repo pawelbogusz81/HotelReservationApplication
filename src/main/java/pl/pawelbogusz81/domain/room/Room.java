@@ -68,6 +68,6 @@ public class Room {
         String[] bedsAsString = getBedsAsString();
         String bedTypes = String.join(",", bedsAsString);
 
-        return String.format("Pokój nr %d, łóżka: %s", this.number, bedTypes);
+        return String.format("Pokoj nr %d, Lozka: %s", this.number, bedTypes);
     }
 }

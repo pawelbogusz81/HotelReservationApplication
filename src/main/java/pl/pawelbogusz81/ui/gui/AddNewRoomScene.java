@@ -15,7 +15,7 @@ import java.util.List;
 public class AddNewRoomScene {
 
     private final Scene mainScene;
-    private final List<ComboBox<String>> comboBoxes = new ArrayList<>();
+    private List<ComboBox<String>> comboBoxes = new ArrayList<>();
     private final RoomService roomService = ObjectPool.getRoomService();
 
     public AddNewRoomScene(final Stage addRoomPopup, final TableView<RoomDTO> tableView){
@@ -26,8 +26,6 @@ public class AddNewRoomScene {
 
         Label bedTypeLabel = new Label("Rodzaje łóżek");
         Button addNewBedButton = new Button("Dodaj");
-
-
         HBox bedTypeRow = new HBox(bedTypeLabel, addNewBedButton);
 
         VBox bedsVerticalBox = new VBox(bedTypeRow, getComboBox());
@@ -37,6 +35,7 @@ public class AddNewRoomScene {
         Button addNewRoomBtn = new Button("Dodaj nowy pokój");
         addNewRoomBtn.setOnAction(event -> {
             int newRoomNumber = Integer.parseInt(imputedRoomNumber.getText());
+            System.out.println(newRoomNumber);
             List<String> bedTypes = new ArrayList<>();
 
             this.comboBoxes.forEach(comboBox -> {
@@ -50,6 +49,7 @@ public class AddNewRoomScene {
             List<RoomDTO> allAsDTO = roomService.getAllAsDTO();
             tableView.getItems().addAll(allAsDTO);
 
+//            System.out.println(roomService.getRoomByID(3).getRoomInfo());
             addRoomPopup.close();
         });
 
@@ -63,6 +63,7 @@ public class AddNewRoomScene {
         ComboBox<String> bedTypeBox = new ComboBox<>();
         bedTypeBox.getItems().addAll("Pojedyncze", "Podwójne", "Królewskie");
         bedTypeBox.setValue("Pojedyncze");
+        comboBoxes.add(bedTypeBox);
         return bedTypeBox;
     }
 
