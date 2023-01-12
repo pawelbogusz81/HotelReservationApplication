@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class App extends Application {
 //public class App {
-
+//testowa linijka
 //    private static final TextUI textUI = new TextUI();
     private static final GuestService guestService = GuestService.getInstance();
     private static final RoomService roomService = RoomService.getInstance();
