@@ -4,6 +4,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.room.RoomService;
 import pl.pawelbogusz81.domain.room.dto.RoomDTO;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class RoomsTab {
     private Tab roomTab;
-    private RoomService roomService = new RoomService();
+    private RoomService roomService = ObjectPool.getRoomService();
 
     public RoomsTab() {
 
