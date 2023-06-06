@@ -3,6 +3,7 @@ package pl.pawelbogusz81.domain.room;
 import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.room.dto.RoomDTO;
 import pl.pawelbogusz81.exceptions.WrongOptionException;
+import pl.pawelbogusz81.util.Properties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,11 @@ public class RoomService {
 
         for (int i = 0; i < bedTypesAsString.size(); i++) {
             BedType bedType;
-            if (bedTypesAsString.get(i).equals("Pojedyncze")) {
+            if (bedTypesAsString.get(i).equals(Properties.SINGLE_BED)) {
                 bedType = BedType.SINGLE;
-            } else if (bedTypesAsString.get(i).equals("Podwójne")) {
+            } else if (bedTypesAsString.get(i).equals(Properties.DOUBLE_BED)) {
                 bedType = BedType.DOUBLE;
-            } else if (bedTypesAsString.get(i).equals("Królewskie")) {
+            } else if (bedTypesAsString.get(i).equals(Properties.KING_SIZE)) {
                 bedType = BedType.KING_SIZE;
             } else {
                 throw new WrongOptionException("Wrong option in bed's type menu.");

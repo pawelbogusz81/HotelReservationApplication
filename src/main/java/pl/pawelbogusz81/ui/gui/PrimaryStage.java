@@ -17,6 +17,7 @@ public class PrimaryStage {
         TabPane mainTabs = mainTabView.getMainTabs();
 
         Scene scene = new Scene(mainTabs,800,600);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
         String title = String.format("System rezerwacji hotelu %s (ver. %d)", hotelName, systemVersion);
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);

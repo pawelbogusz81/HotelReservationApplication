@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import pl.pawelbogusz81.domain.ObjectPool;
 import pl.pawelbogusz81.domain.room.RoomService;
 import pl.pawelbogusz81.domain.room.dto.RoomDTO;
+import pl.pawelbogusz81.util.Properties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,16 +76,20 @@ public class AddNewRoomScene {
         addNewBedButton.setPadding(new Insets(5,5,5,5));
 
         gridPane.add(bedsVerticalBox,1,2);
-        gridPane.add(addNewRoomBtn,1,3);
+        gridPane.add(addNewRoomBtn,1,4);
 
         this.mainScene = new Scene(gridPane,640,480);
+        this.mainScene
+                .getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
 
     }
 
     private ComboBox<String> getComboBox() {
         ComboBox<String> bedTypeBox = new ComboBox<>();
-        bedTypeBox.getItems().addAll("Pojedyncze", "Podwójne", "Królewskie");
-        bedTypeBox.setValue("Pojedyncze");
+        bedTypeBox.getItems().addAll(Properties.SINGLE_BED,
+                Properties.DOUBLE_BED,
+                Properties.KING_SIZE);
+        bedTypeBox.setValue(Properties.SINGLE_BED);
         comboBoxes.add(bedTypeBox);
         return bedTypeBox;
     }
