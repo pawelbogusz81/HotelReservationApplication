@@ -22,7 +22,7 @@ public class AddNewRoomScene {
     private final RoomService roomService = ObjectPool.getRoomService();
 
     public AddNewRoomScene(final Stage addRoomPopup, final TableView<RoomDTO> tableView){
-
+//TEST
         Label roomNumberLabel = new Label("Numer pokoju");
         TextField imputedRoomNumber = new TextField();
         HBox roomNumberRow = new HBox(roomNumberLabel, imputedRoomNumber);
