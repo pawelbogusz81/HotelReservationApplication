@@ -1,10 +1,12 @@
 package pl.pawelbogusz81.ui.gui;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,13 +25,19 @@ public class AddNewRoomScene {
 
     public AddNewRoomScene(final Stage addRoomPopup, final TableView<RoomDTO> tableView){
 
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setVgap(10);
+
         Label roomNumberLabel = new Label("Numer pokoju");
         TextField imputedRoomNumber = new TextField();
-        HBox roomNumberRow = new HBox(roomNumberLabel, imputedRoomNumber);
+
+        gridPane.add(roomNumberLabel,0,0);
+        gridPane.add(imputedRoomNumber,1,0);
 
         Label bedTypeLabel = new Label("Rodzaje łóżek");
-        Button addNewBedButton = new Button();
 
+        Button addNewBedButton = new Button();
         Image icon = new Image(getClass().getClassLoader().getResourceAsStream("add.jpg"));
         ImageView imageView = new ImageView(icon);
         imageView.setFitWidth(16);
@@ -37,9 +45,10 @@ public class AddNewRoomScene {
         addNewBedButton.setGraphic(imageView);
         addNewBedButton.setPadding(Insets.EMPTY);
 
-        HBox bedTypeRow = new HBox(bedTypeLabel, addNewBedButton);
+        gridPane.add(bedTypeLabel,0,1);
+        gridPane.add(addNewBedButton,1,1);
 
-        VBox bedsVerticalBox = new VBox(bedTypeRow, getComboBox());
+        VBox bedsVerticalBox = new VBox(getComboBox());
 
         addNewBedButton.setOnAction(event -> bedsVerticalBox.getChildren().add(getComboBox()));
 
@@ -63,9 +72,12 @@ public class AddNewRoomScene {
             addRoomPopup.close();
         });
 
-        VBox box = new VBox(roomNumberRow, bedsVerticalBox, addNewRoomBtn);
+        addNewBedButton.setPadding(new Insets(5,5,5,5));
 
-        this.mainScene = new Scene(box,640,480);
+        gridPane.add(bedsVerticalBox,1,2);
+        gridPane.add(addNewRoomBtn,1,3);
+
+        this.mainScene = new Scene(gridPane,640,480);
 
     }
 
